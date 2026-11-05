@@ -1,0 +1,85 @@
+{
+  "_comment": "Official public sources for the Pension Sahayak corpus (plan 6.4). Every source ships DISABLED. Before enabling one: (1) open the index_url in a browser and confirm it lists documents; (2) read the site's reuse / robots terms; (3) set 'enabled' to true. The crawl only records metadata (title, issuer, url, dates) as DRAFT documents; nothing reaches a pensioner until an admin approves it and the evaluation gate passes. The index URLs are starting points to be verified by an operator, not assertions that they are correct.",
+  "sources": [
+    {
+      "name": "DoPPW office memoranda",
+      "issuer": "Department of Pension & Pensioners' Welfare",
+      "url": "https://doppw.gov.in/",
+      "hosts": ["doppw.gov.in"],
+      "link_pattern": "\\.pdf($|\\?)",
+      "service_types": ["central_civil"],
+      "phase": 1,
+      "enabled": false
+    },
+    {
+      "name": "Pensioners' Portal",
+      "issuer": "Department of Pension & Pensioners' Welfare",
+      "url": "https://pensionersportal.gov.in/",
+      "hosts": ["pensionersportal.gov.in"],
+      "link_pattern": "\\.pdf($|\\?)",
+      "service_types": ["central_civil"],
+      "phase": 1,
+      "enabled": false
+    },
+    {
+      "name": "Jeevan Pramaan",
+      "issuer": "Jeevan Pramaan (MeitY / DoPPW)",
+      "url": "https://jeevanpramaan.gov.in/",
+      "hosts": ["jeevanpramaan.gov.in"],
+      "link_pattern": "\\.pdf($|\\?)",
+      "service_types": [],
+      "phase": 1,
+      "enabled": false
+    },
+    {
+      "name": "CGHS",
+      "issuer": "Central Government Health Scheme",
+      "url": "https://cghs.gov.in/",
+      "hosts": ["cghs.gov.in", "cghs.nic.in"],
+      "link_pattern": "\\.pdf($|\\?)",
+      "service_types": ["central_civil"],
+      "phase": 1,
+      "enabled": false
+    },
+    {
+      "name": "ECHS",
+      "issuer": "Ex-Servicemen Contributory Health Scheme",
+      "url": "https://echs.gov.in/",
+      "hosts": ["echs.gov.in"],
+      "link_pattern": "\\.pdf($|\\?)",
+      "service_types": ["defence"],
+      "phase": 2,
+      "enabled": false
+    },
+    {
+      "name": "Income tax for pensioners",
+      "issuer": "Income Tax Department",
+      "url": "https://www.incometax.gov.in/",
+      "hosts": ["www.incometax.gov.in", "incometaxindia.gov.in"],
+      "link_pattern": "\\.pdf($|\\?)",
+      "service_types": [],
+      "phase": 2,
+      "enabled": false
+    },
+    {
+      "name": "NPS and Unified Pension Scheme",
+      "issuer": "PFRDA",
+      "url": "https://www.pfrda.org.in/",
+      "hosts": ["www.pfrda.org.in", "pfrda.org.in"],
+      "link_pattern": "\\.pdf($|\\?)",
+      "service_types": [],
+      "phase": 3,
+      "enabled": false
+    }
+  ],
+  "news_feeds": [
+    {
+      "name": "PIB press releases",
+      "publisher": "Press Information Bureau",
+      "url": "https://pib.gov.in/RssMain.aspx?ModId=6&Lang=1&Regid=3",
+      "language": "en",
+      "keywords": ["pension", "pensioner", "dearness relief", "DoPPW", "family pension", "CGHS", "Jeevan Pramaan", "gratuity"],
+      "enabled": false
+    }
+  ]
+}

@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Plan section 4.3, dark column. Mirrors DoosriPariDarkColors. -->
+<resources>
+    <color name="background">#0F1414</color>
+    <color name="accent">#6FD3C9</color>
+</resources>

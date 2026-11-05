@@ -1,0 +1,1061 @@
+<title>Doosri Pari App Preview</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@500;600;700&family=Noto+Sans+Devanagari:wght@500;600;700&family=Noto+Serif+Devanagari:wght@600;700&family=Noto+Sans+Bengali:wght@600&family=Noto+Sans+Tamil:wght@600&family=Noto+Sans+Telugu:wght@600&family=Noto+Sans+Kannada:wght@600&family=Noto+Sans+Malayalam:wght@600&family=Noto+Sans+Gujarati:wght@600&family=Noto+Sans+Gurmukhi:wght@600&display=swap">
+<style>
+/* Layout: a working stage. The main phone is live (splash, onboarding, four tabs, tools); a second phone is the family's
+   view and reacts to what the pensioner does. A screen index and the design system sit beside and below. */
+:root {
+  --bg: #F3F5F1;            /* stage behind the phones */
+  --screen: #FAFAF7;        /* app background */
+  --surface: #FFFFFF;       /* cards, sheets */
+  --ink: #13201F;           /* primary text, 7:1 on --screen */
+  --ink2: #3F4E4C;          /* secondary text */
+  --accent: #0B6E66;        /* deep teal: the one main action per screen */
+  --on-accent: #FFFFFF;
+  --tint: #E3F1EF;          /* teal wash for icon squares and selected states */
+  --marigold: #B97700;      /* spiritual / highlights, never body text on white */
+  --gold-tint: #FBF0DA;
+  --safety: #C0311B;        /* SOS and missed check-in only */
+  --safety-tint: #FBE6E1;
+  --ok: #1E7A34;            /* I'm fine, success */
+  --ok-tint: #E2F2E6;
+  --divider: #E1E7E5;
+  --frame: #1B2322;
+  --shadow: 0 1px 2px rgba(19,32,31,.06), 0 8px 24px rgba(19,32,31,.08);
+  --font-body: 'Noto Sans', 'Noto Sans Devanagari', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-mark: 'Noto Serif Devanagari', 'Noto Sans Devanagari', Georgia, serif;
+  --ts: 1;                  /* in-app text scale: 1, 1.15, 1.3 */
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0A0F0F; --screen: #0F1414; --surface: #1A2121; --ink: #EEF3F2; --ink2: #B8C6C4;
+    --accent: #6FD3C9; --on-accent: #062B28; --tint: #16302D; --marigold: #F2B544; --gold-tint: #2E2410;
+    --safety: #FF8A73; --safety-tint: #3A1B15; --ok: #7BD38B; --ok-tint: #17301C; --divider: #2A3332;
+    --frame: #2B3433; --shadow: 0 1px 2px rgba(0,0,0,.4), 0 8px 24px rgba(0,0,0,.4);
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #0A0F0F; --screen: #0F1414; --surface: #1A2121; --ink: #EEF3F2; --ink2: #B8C6C4;
+  --accent: #6FD3C9; --on-accent: #062B28; --tint: #16302D; --marigold: #F2B544; --gold-tint: #2E2410;
+  --safety: #FF8A73; --safety-tint: #3A1B15; --ok: #7BD38B; --ok-tint: #17301C; --divider: #2A3332;
+  --frame: #2B3433; --shadow: 0 1px 2px rgba(0,0,0,.4), 0 8px 24px rgba(0,0,0,.4);
+  color-scheme: dark;
+}
+body { background: var(--bg); color: var(--ink); font-family: var(--font-body); font-size: 15px; line-height: 1.5;
+  padding-inline: 16px; padding-block: 24px 64px; }
+* { box-sizing: border-box; }
+button { font: inherit; color: inherit; cursor: pointer; border: 0; background: none; padding: 0; }
+button:focus-visible, a:focus-visible, input:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; border-radius: 8px; }
+h1, h2, h3, p { margin: 0; text-wrap: balance; }
+.page { max-width: 1120px; margin-inline: auto; display: flex; flex-direction: column; gap: 40px; }
+
+/* ---------- page chrome ---------- */
+.top { display: flex; flex-wrap: wrap; gap: 16px 32px; align-items: end; justify-content: space-between; }
+.top h1 { font-size: clamp(26px, 4vw, 38px); line-height: 1.1; font-weight: 700; letter-spacing: -.01em; }
+.top h1 span { font-family: var(--font-mark); color: var(--accent); }
+.top p { color: var(--ink2); max-width: 56ch; margin-top: 8px; }
+.tools { display: flex; flex-wrap: wrap; gap: 8px; }
+.chip { min-height: 40px; padding: 0 14px; border-radius: 20px; background: var(--surface); border: 1px solid var(--divider);
+  font-weight: 600; font-size: 14px; display: inline-flex; align-items: center; gap: 8px; }
+.chip[aria-pressed="true"], .chip.on { background: var(--accent); color: var(--on-accent); border-color: var(--accent); }
+.note { font-size: 13px; color: var(--ink2); }
+
+.stage { display: grid; grid-template-columns: minmax(0, auto) minmax(0, auto) minmax(240px, 1fr); gap: 32px; align-items: start; justify-content: center; }
+@media (max-width: 1020px) { .stage { grid-template-columns: minmax(0, 1fr); justify-items: center; } .index { width: 100%; } }
+.col { display: flex; flex-direction: column; gap: 12px; align-items: center; min-width: 0; }
+.col > .cap { font-size: 13px; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; color: var(--ink2); }
+
+.index { display: flex; flex-direction: column; gap: 8px; min-width: 0; }
+.index h2 { font-size: 13px; letter-spacing: .06em; text-transform: uppercase; color: var(--ink2); font-weight: 600; margin-bottom: 4px; }
+.jump { display: grid; grid-template-columns: 1fr; gap: 6px; }
+.jump button { text-align: left; padding: 10px 12px; border-radius: 12px; background: var(--surface); border: 1px solid var(--divider);
+  display: flex; flex-direction: column; gap: 1px; }
+.jump button b { font-size: 14px; font-weight: 600; }
+.jump button span { font-size: 12.5px; color: var(--ink2); }
+.jump button[aria-current="true"] { border-color: var(--accent); box-shadow: inset 3px 0 0 var(--accent); }
+
+/* ---------- the phone ---------- */
+.fit { position: relative; }
+.phone { width: 360px; height: 740px; border-radius: 48px; background: var(--frame); padding: 10px; position: absolute; left: 0; top: 0;
+  transform-origin: top left; box-shadow: var(--shadow); }
+.glass { width: 100%; height: 100%; border-radius: 38px; overflow: hidden; position: relative; background: var(--screen); color: var(--ink);
+  isolation: isolate; }
+.glass.on-splash .statusbar { color: #fff; }
+.island { position: absolute; top: 9px; left: 50%; width: 92px; height: 26px; border-radius: 14px; background: #000; transform: translateX(-50%); z-index: 50; }
+.statusbar { position: absolute; z-index: 40; top: 0; left: 0; right: 0; height: 44px; padding: 12px 26px 0; display: flex; justify-content: space-between;
+  font-size: 13px; font-weight: 700; pointer-events: none; }
+.scr { position: absolute; inset: 0; padding-top: 44px; display: none; flex-direction: column; background: var(--screen); }
+.scr.on { display: flex; animation: scr-in .42s cubic-bezier(.2,.8,.2,1) both; }
+.scr.rev.on { animation-name: scr-back; }
+@keyframes scr-in { from { opacity: 0; transform: translateX(22px); } to { opacity: 1; transform: none; } }
+@keyframes scr-back { from { opacity: 0; transform: translateX(-22px); } to { opacity: 1; transform: none; } }
+.body { flex: 1; overflow-y: auto; overflow-x: hidden; padding: 4px 20px 24px; display: flex; flex-direction: column; gap: 12px;
+  scrollbar-width: none; }
+.body::-webkit-scrollbar { display: none; }
+.fs { font-size: calc(var(--ts) * 1em); }
+.t-large { font-size: calc(var(--ts) * 30px); font-weight: 700; line-height: 1.15; letter-spacing: -.01em; }
+.t-title { font-size: calc(var(--ts) * 22px); font-weight: 700; line-height: 1.2; }
+.t-head { font-size: calc(var(--ts) * 18px); font-weight: 600; line-height: 1.25; }
+.t-body { font-size: calc(var(--ts) * 16px); line-height: 1.4; }
+.t-call { font-size: calc(var(--ts) * 14.5px); line-height: 1.35; }
+.t-cap { font-size: calc(var(--ts) * 13px); line-height: 1.35; color: var(--ink2); }
+.mut { color: var(--ink2); }
+
+/* toolbar, tabs */
+.bar { display: flex; align-items: center; justify-content: space-between; gap: 8px; padding: 6px 20px 2px; min-height: 52px; }
+.back { display: inline-flex; align-items: center; gap: 4px; min-height: 44px; font-weight: 600; color: var(--accent); font-size: calc(var(--ts) * 15px); }
+.sos { min-width: 64px; min-height: 40px; padding: 0 14px; border-radius: 20px; background: var(--safety); color: #fff; font-weight: 700; letter-spacing: .04em;
+  position: relative; overflow: hidden; user-select: none; touch-action: none; }
+:root[data-theme="dark"] .sos { color: #2A0A04; }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .sos { color: #2A0A04; } }
+.sos i { position: absolute; inset: 0; background: rgba(255,255,255,.35); transform-origin: left; transform: scaleX(0); }
+.sos.hold i { animation: fill 2s linear forwards; }
+@keyframes fill { to { transform: scaleX(1); } }
+.tabbar { position: absolute; left: 10px; right: 10px; bottom: 10px; height: 72px; border-radius: 30px; display: none; z-index: 20;
+  background: color-mix(in srgb, var(--surface) 78%, transparent); backdrop-filter: blur(18px) saturate(1.4); -webkit-backdrop-filter: blur(18px) saturate(1.4);
+  border: 1px solid var(--divider); box-shadow: var(--shadow); padding: 6px; grid-template-columns: repeat(4, 1fr); gap: 4px; }
+.tabbar.on { display: grid; }
+.tab { border-radius: 24px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px; color: var(--ink2);
+  font-size: calc(var(--ts) * 12.5px); font-weight: 600; transition: background .25s, color .25s; }
+.tab svg { width: 24px; height: 24px; }
+.tab[aria-selected="true"] { background: var(--tint); color: var(--accent); }
+.bolo { position: absolute; right: 18px; bottom: 96px; z-index: 21; width: 64px; height: 64px; border-radius: 50%; display: none; align-items: center; justify-content: center;
+  background: color-mix(in srgb, var(--surface) 70%, transparent); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
+  border: 1px solid var(--divider); box-shadow: var(--shadow); flex-direction: column; gap: 0; color: var(--accent); font-size: 11px; font-weight: 700; }
+.bolo.on { display: flex; }
+.bolo svg { width: 24px; height: 24px; }
+.bolo::after { content: ""; position: absolute; inset: -4px; border-radius: 50%; border: 2px solid var(--accent); opacity: 0; animation: pulse 2.8s ease-out infinite; }
+@keyframes pulse { 0% { transform: scale(.9); opacity: .5; } 70%,100% { transform: scale(1.25); opacity: 0; } }
+
+/* buttons, cards, rows */
+.btn { min-height: 64px; border-radius: 32px; width: 100%; background: var(--accent); color: var(--on-accent); font-size: calc(var(--ts) * 18px); font-weight: 700;
+  display: flex; align-items: center; justify-content: center; gap: 10px; transition: transform .15s; }
+.btn:active { transform: scale(.98); }
+.btn.sec { min-height: 56px; background: var(--tint); color: var(--accent); font-size: calc(var(--ts) * 16px); }
+.btn.line { background: transparent; border: 2px solid var(--accent); color: var(--accent); min-height: 56px; }
+.btn.danger { background: var(--safety); color: #fff; }
+:root[data-theme="dark"] .btn.danger { color: #2A0A04; }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .btn.danger { color: #2A0A04; } }
+.btn svg { width: 22px; height: 22px; }
+.card { background: var(--surface); border-radius: 14px; padding: 16px; display: flex; flex-direction: column; gap: 8px; border: 1px solid var(--divider); }
+.card h3 { font-size: calc(var(--ts) * 13px); font-weight: 600; letter-spacing: .06em; text-transform: uppercase; color: var(--ink2); }
+.row { min-height: 64px; display: flex; align-items: center; gap: 14px; padding: 8px 14px 8px 10px; background: var(--surface); border-radius: 14px; border: 1px solid var(--divider); text-align: left; width: 100%; }
+.row .ic { width: 44px; height: 44px; border-radius: 12px; background: var(--tint); color: var(--accent); display: grid; place-items: center; flex: none; }
+.row .ic.gold { background: var(--gold-tint); color: var(--marigold); }
+.row .ic svg { width: 24px; height: 24px; }
+.row .tx { flex: 1; min-width: 0; display: flex; flex-direction: column; }
+.row .tx b { font-size: calc(var(--ts) * 16px); font-weight: 600; }
+.row .tx span { font-size: calc(var(--ts) * 13.5px); color: var(--ink2); }
+.chev { width: 18px; height: 18px; color: var(--ink2); flex: none; }
+.lang-btn { min-height: 60px; border-radius: 16px; background: var(--surface); border: 1.5px solid var(--divider); display: flex; align-items: center; gap: 10px; padding: 0 12px 0 16px;
+  font-size: calc(var(--ts) * 19px); font-weight: 600; text-align: left; }
+.lang-btn svg { width: 22px; height: 22px; color: var(--accent); margin-left: auto; flex: none; }
+.lang-btn[aria-pressed="true"] { border-color: var(--accent); background: var(--tint); }
+.pill { display: inline-flex; align-items: center; gap: 6px; padding: 4px 10px; border-radius: 12px; font-size: calc(var(--ts) * 12.5px); font-weight: 700; background: var(--tint); color: var(--accent); }
+.pill.gold { background: var(--gold-tint); color: var(--marigold); }
+.pill.red { background: var(--safety-tint); color: var(--safety); }
+.pill.ok { background: var(--ok-tint); color: var(--ok); }
+.sample { position: absolute; z-index: 45; top: 14px; right: 18px; font-size: 10px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--ink2); opacity: .7; pointer-events: none; }
+
+/* check-in button */
+.checkin { min-height: 96px; border-radius: 30px; width: 100%; background: var(--ok); color: #fff; font-size: calc(var(--ts) * 20px); font-weight: 700; display: flex; align-items: center; justify-content: center; gap: 12px;
+  position: relative; overflow: hidden; transition: background .3s, transform .15s; }
+:root[data-theme="dark"] .checkin { color: #08240F; }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .checkin { color: #08240F; } }
+.checkin:active { transform: scale(.985); }
+.checkin small { display: block; font-size: calc(var(--ts) * 13px); font-weight: 600; opacity: .9; }
+.checkin .tick { width: 34px; height: 34px; flex: none; }
+.checkin .tick path { stroke-dasharray: 30; stroke-dashoffset: 30; }
+.checkin.done { background: var(--ok-tint); color: var(--ok); border: 2px solid var(--ok); }
+.checkin.done .tick path { animation: draw .55s .1s ease-out forwards; }
+@keyframes draw { to { stroke-dashoffset: 0; } }
+.checkin.sending::after { content: ""; position: absolute; inset: 0; background: linear-gradient(100deg, transparent 20%, rgba(255,255,255,.35) 50%, transparent 80%); animation: sweep .7s linear infinite; }
+@keyframes sweep { from { transform: translateX(-100%); } to { transform: translateX(100%); } }
+
+/* ---------- splash ---------- */
+.splash { position: absolute; inset: 0; overflow: hidden; display: none; background: linear-gradient(180deg, #06302C 0%, #0B6E66 62%, #E8A63C 118%); color: #fff; z-index: 30; padding: 0; }
+.splash.on { display: block; }
+.splash svg.scene { position: absolute; inset: 0; width: 100%; height: 100%; }
+.splash .sun { transform: translateY(150px); }
+.splash .halo { opacity: 0; transform-origin: 180px 470px; }
+.splash .word { position: absolute; left: 0; right: 0; top: 96px; text-align: center; }
+.splash .mark { font-family: var(--font-mark); font-weight: 700; font-size: 46px; letter-spacing: .01em; clip-path: inset(0 100% 0 0); line-height: 1.25; }
+.splash .en { font-size: 13px; font-weight: 600; letter-spacing: .32em; text-transform: uppercase; opacity: 0; margin-top: 4px; }
+.splash .tag { font-size: 16px; opacity: 0; margin-top: 18px; }
+.splash .skip { position: absolute; bottom: 22px; left: 0; right: 0; text-align: center; font-size: 12px; opacity: .0; letter-spacing: .06em; }
+.splash .bird { opacity: 0; }
+.splash .hill1 { transform: translateY(40px); }
+.splash .hill2 { transform: translateY(70px); }
+.splash.go .sun { animation: rise 2.6s .2s cubic-bezier(.2,.7,.2,1) forwards; }
+.splash.go .halo { animation: halo 2.4s 1.6s ease-out forwards, spin 40s linear infinite; }
+.splash.go .hill1 { animation: hill 1.8s .1s ease-out forwards; }
+.splash.go .hill2 { animation: hill 2.2s 0s ease-out forwards; }
+.splash.go .mark { animation: reveal 1.3s 1.7s cubic-bezier(.6,0,.2,1) forwards; }
+.splash.go .en { animation: fade .8s 2.8s ease-out forwards; }
+.splash.go .tag { animation: fade .8s 3.2s ease-out forwards; }
+.splash.go .skip { animation: fade .6s 3.6s ease-out forwards; }
+.splash.go .bird { animation: bird 5s 1.2s ease-in-out forwards; }
+.splash.go .bird.b2 { animation-delay: 1.6s; }
+@keyframes rise { to { transform: translateY(0); } }
+@keyframes halo { to { opacity: 1; } }
+@keyframes spin { to { transform: rotate(360deg); } }
+@keyframes hill { to { transform: none; } }
+@keyframes reveal { to { clip-path: inset(0 0 0 0); } }
+@keyframes fade { to { opacity: .95; } }
+@keyframes bird { 0% { opacity: 0; transform: translate(-30px, 20px); } 15% { opacity: .9; } 85% { opacity: .9; } 100% { opacity: 0; transform: translate(170px, -50px); } }
+
+/* ---------- language / onboarding ---------- */
+.lang-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.sizes { display: flex; flex-direction: column; gap: 10px; }
+.sizebtn { border-radius: 16px; background: var(--surface); border: 1.5px solid var(--divider); padding: 14px 16px; display: flex; align-items: center; justify-content: space-between; text-align: left; }
+.sizebtn[aria-pressed="true"] { border-color: var(--accent); background: var(--tint); }
+.hero-line { display: flex; gap: 12px; align-items: flex-start; }
+.hero-line .dot { width: 10px; height: 10px; border-radius: 50%; background: var(--accent); margin-top: 10px; flex: none; }
+.otp { display: flex; gap: 8px; }
+.otp i { flex: 1; height: 60px; border-radius: 14px; border: 2px solid var(--divider); background: var(--surface); display: grid; place-items: center; font-style: normal; font-size: calc(var(--ts) * 26px); font-weight: 700; font-variant-numeric: tabular-nums; }
+.otp i.f { border-color: var(--accent); }
+.legal { font-size: calc(var(--ts) * 13px); color: var(--ink2); background: var(--gold-tint); border-radius: 12px; padding: 12px 14px; }
+
+/* ---------- home ---------- */
+.greet small { color: var(--ink2); font-size: calc(var(--ts) * 14px); }
+.kv { display: flex; align-items: baseline; justify-content: space-between; gap: 8px; }
+.big-num { font-size: calc(var(--ts) * 28px); font-weight: 700; font-variant-numeric: tabular-nums; color: var(--accent); }
+.play { width: 48px; height: 48px; border-radius: 50%; background: var(--accent); color: var(--on-accent); display: grid; place-items: center; flex: none; }
+.play svg { width: 22px; height: 22px; }
+.eq { display: inline-flex; gap: 3px; align-items: flex-end; height: 18px; }
+.eq i { width: 4px; background: var(--accent); border-radius: 2px; animation: eq 1s ease-in-out infinite; height: 100%; transform-origin: bottom; }
+.eq i:nth-child(2) { animation-delay: .2s; } .eq i:nth-child(3) { animation-delay: .4s; } .eq i:nth-child(4) { animation-delay: .1s; }
+@keyframes eq { 0%,100% { transform: scaleY(.25); } 50% { transform: scaleY(1); } }
+.wx { display: flex; align-items: center; gap: 14px; }
+.wx svg { width: 48px; height: 48px; }
+
+/* ---------- feed ---------- */
+.post { padding: 0; overflow: hidden; gap: 0; }
+.post .pad { padding: 14px 16px; display: flex; flex-direction: column; gap: 6px; }
+.post svg.art { width: 100%; height: auto; display: block; }
+.nam { min-height: 44px; padding: 0 14px; border-radius: 22px; background: var(--tint); color: var(--accent); font-weight: 700; display: inline-flex; align-items: center; gap: 8px; font-size: calc(var(--ts) * 14px); }
+.nam svg { width: 22px; height: 22px; transition: transform .3s; }
+.nam[aria-pressed="true"] { background: var(--accent); color: var(--on-accent); }
+.nam[aria-pressed="true"] svg { animation: bloom .6s ease-out; }
+@keyframes bloom { 0% { transform: scale(.6) rotate(-20deg); } 60% { transform: scale(1.35) rotate(8deg); } 100% { transform: scale(1); } }
+.live { background: linear-gradient(135deg, var(--tint), var(--gold-tint)); border: 1px solid var(--divider); border-radius: 14px; padding: 14px 16px; display: flex; align-items: center; gap: 14px; }
+.chips { display: flex; gap: 8px; overflow-x: auto; scrollbar-width: none; padding-bottom: 2px; }
+.chips::-webkit-scrollbar { display: none; }
+.chips .chip { flex: none; min-height: 44px; font-size: calc(var(--ts) * 14px); }
+
+/* ---------- sahayak ---------- */
+.bubble { align-self: flex-end; max-width: 88%; background: var(--accent); color: var(--on-accent); padding: 12px 16px; border-radius: 20px 20px 6px 20px; font-size: calc(var(--ts) * 16px); }
+.answer { background: var(--surface); border: 1px solid var(--divider); border-radius: 6px 20px 20px 20px; padding: 16px; display: flex; flex-direction: column; gap: 10px; }
+.cite { display: inline-block; font-size: .8em; font-weight: 700; color: var(--marigold); background: var(--gold-tint); padding: 1px 6px; border-radius: 6px; white-space: nowrap; }
+.caret::after { content: ""; display: inline-block; width: 2px; height: 1em; background: var(--accent); margin-left: 2px; vertical-align: -2px; animation: blink 1s steps(2) infinite; }
+@keyframes blink { 50% { opacity: 0; } }
+.src { display: flex; align-items: center; gap: 10px; padding: 10px 12px; border-radius: 12px; background: var(--screen); border: 1px solid var(--divider); text-align: left; width: 100%; font-size: calc(var(--ts) * 13.5px); }
+.src svg { width: 16px; height: 16px; color: var(--ink2); margin-left: auto; flex: none; }
+.fb { display: flex; gap: 8px; flex-wrap: wrap; }
+.fb .chip { min-height: 44px; }
+
+/* ---------- toolkit ---------- */
+.field { display: flex; flex-direction: column; gap: 4px; }
+.field label { font-size: calc(var(--ts) * 13px); font-weight: 600; color: var(--ink2); }
+.field input { min-height: 56px; border-radius: 14px; border: 1.5px solid var(--divider); background: var(--surface); padding: 0 14px; font: inherit; font-size: calc(var(--ts) * 20px); font-weight: 600; color: var(--ink); width: 100%; font-variant-numeric: tabular-nums; }
+.two { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.result { background: var(--tint); border-radius: 16px; padding: 16px; display: flex; flex-direction: column; gap: 4px; }
+.lock { display: flex; gap: 8px; align-items: center; font-size: calc(var(--ts) * 13px); color: var(--ink2); }
+.lock svg { width: 18px; height: 18px; color: var(--accent); flex: none; }
+
+/* ---------- seva ---------- */
+.list { display: flex; flex-direction: column; gap: 4px; }
+.stars { color: var(--marigold); font-weight: 700; font-size: calc(var(--ts) * 13px); }
+.warn { background: var(--safety-tint); color: var(--safety); border-radius: 12px; padding: 10px 14px; font-weight: 700; font-size: calc(var(--ts) * 13.5px); display: flex; gap: 8px; align-items: center; }
+
+/* ---------- yoga ---------- */
+.stage-y { border-radius: 20px; background: linear-gradient(180deg, var(--gold-tint), var(--tint)); position: relative; overflow: hidden; aspect-ratio: 1.05; display: grid; place-items: center; }
+.stage-y svg { width: 100%; height: 100%; }
+.progress { height: 8px; border-radius: 4px; background: var(--divider); overflow: hidden; }
+.progress i { display: block; height: 100%; width: 0; background: var(--accent); border-radius: 4px; transition: width .6s; }
+.ctrl { display: grid; grid-template-columns: 1fr 1.3fr 1fr; gap: 8px; }
+.ctrl .btn { min-height: 64px; font-size: calc(var(--ts) * 16px); }
+.orb-wrap { display: grid; place-items: center; height: 300px; position: relative; }
+.orb { width: 150px; height: 150px; border-radius: 50%; background: radial-gradient(circle at 35% 30%, #fff8, transparent 40%), radial-gradient(circle, var(--accent), color-mix(in srgb, var(--accent) 40%, transparent) 70%, transparent 72%);
+  box-shadow: 0 0 60px color-mix(in srgb, var(--accent) 55%, transparent); animation: breathe 10s ease-in-out infinite; }
+@keyframes breathe { 0%,100% { transform: scale(.7); } 40% { transform: scale(1.35); } 55% { transform: scale(1.35); } }
+.orb-txt { position: absolute; font-weight: 700; font-size: calc(var(--ts) * 20px); color: var(--on-accent); text-shadow: 0 1px 8px rgba(0,0,0,.25); }
+.seg { display: grid; grid-template-columns: 1fr 1fr; background: var(--tint); border-radius: 22px; padding: 4px; gap: 4px; }
+.seg button { min-height: 44px; border-radius: 18px; font-weight: 700; color: var(--accent); font-size: calc(var(--ts) * 14.5px); }
+.seg button[aria-pressed="true"] { background: var(--accent); color: var(--on-accent); }
+
+/* instructor animation: one loop per pose, driven by a class on the svg */
+.inst .arm-r, .inst .arm-l, .inst .torso { transition: transform .8s ease; }
+.inst .arm-r { transform-origin: 178px 200px; }
+.inst .arm-l { transform-origin: 122px 200px; }
+.inst .torso { transform-origin: 150px 262px; }
+.inst.p0 .torso { animation: lean 7s ease-in-out infinite; }
+.inst.p0 .arm-r { animation: overhead 7s ease-in-out infinite; }
+.inst.p1 .arm-r { animation: roll 3.4s linear infinite; }
+.inst.p1 .arm-l { animation: roll 3.4s linear infinite reverse; }
+.inst.p2 .arm-r { animation: open-r 6s ease-in-out infinite; }
+.inst.p2 .arm-l { animation: open-l 6s ease-in-out infinite; }
+.inst.p2 .torso { animation: rise 6s ease-in-out infinite; }
+.inst.paused * { animation-play-state: paused !important; }
+@keyframes lean { 0%,12%,100% { transform: rotate(0); } 40%,68% { transform: rotate(-9deg); } }
+@keyframes overhead { 0%,12%,100% { transform: rotate(0); } 40%,68% { transform: rotate(158deg); } }
+@keyframes roll { 0% { transform: rotate(0); } 25% { transform: rotate(-30deg); } 50% { transform: rotate(0); } 75% { transform: rotate(30deg); } 100% { transform: rotate(0); } }
+@keyframes open-r { 0%,100% { transform: rotate(0); } 45%,60% { transform: rotate(-150deg); } }
+@keyframes open-l { 0%,100% { transform: rotate(0); } 45%,60% { transform: rotate(150deg); } }
+@keyframes rise { 0%,100% { transform: translateY(0); } 45%,60% { transform: translateY(-4px) scaleY(1.02); } }
+.inst .glow { animation: glow 4s ease-in-out infinite; transform-origin: 150px 188px; }
+@keyframes glow { 0%,100% { opacity: .35; transform: scale(1); } 50% { opacity: .7; transform: scale(1.08); } }
+
+/* ---------- SOS ---------- */
+.sos-scr { background: var(--safety-tint) !important; align-items: center; text-align: center; }
+.ring { width: 200px; height: 200px; position: relative; display: grid; place-items: center; margin-top: 12px; }
+.ring svg { position: absolute; inset: 0; transform: rotate(-90deg); }
+.ring circle.trk { stroke: color-mix(in srgb, var(--safety) 25%, transparent); }
+.ring circle.prg { stroke: var(--safety); stroke-dasharray: 565; stroke-dashoffset: 565; stroke-linecap: round; }
+.ring.go circle.prg { animation: cd 5s linear forwards; }
+@keyframes cd { to { stroke-dashoffset: 0; } }
+.ring b { font-size: 76px; color: var(--safety); font-variant-numeric: tabular-nums; }
+.report { width: 100%; text-align: left; display: flex; flex-direction: column; gap: 8px; }
+.report div { display: flex; justify-content: space-between; gap: 8px; padding: 10px 14px; background: var(--surface); border-radius: 12px; font-size: calc(var(--ts) * 14px); }
+
+/* ---------- Bolo sheet ---------- */
+.sheet-bg { position: absolute; inset: 0; background: rgba(0,0,0,.45); z-index: 60; opacity: 0; pointer-events: none; transition: opacity .3s; }
+.sheet-bg.on { opacity: 1; pointer-events: auto; }
+.sheet { position: absolute; left: 0; right: 0; bottom: 0; z-index: 61; background: var(--screen); border-radius: 28px 28px 0 0; padding: 10px 20px 26px; transform: translateY(105%); transition: transform .42s cubic-bezier(.2,.8,.2,1);
+  display: flex; flex-direction: column; gap: 12px; max-height: 78%; }
+.sheet.on { transform: none; }
+.grab { width: 40px; height: 5px; border-radius: 3px; background: var(--divider); align-self: center; }
+.wave { display: flex; gap: 4px; align-items: center; justify-content: center; height: 56px; }
+.wave i { width: 6px; border-radius: 3px; background: var(--accent); height: 100%; animation: wv .9s ease-in-out infinite; transform-origin: center; }
+.wave i:nth-child(odd) { animation-duration: 1.1s; } .wave i:nth-child(3n) { animation-delay: .15s; } .wave i:nth-child(4n) { animation-delay: .3s; }
+@keyframes wv { 0%,100% { transform: scaleY(.2); } 50% { transform: scaleY(1); } }
+.wave.stop i { animation: none; transform: scaleY(.15); }
+.heard { min-height: 52px; font-size: calc(var(--ts) * 20px); font-weight: 600; text-align: center; }
+.route { border-radius: 16px; background: var(--tint); padding: 14px 16px; display: flex; flex-direction: column; gap: 6px; }
+
+/* ---------- family phone ---------- */
+.lock-scr { position: absolute; inset: 0; background: linear-gradient(180deg, #16303a, #0b1418); color: #fff; padding: 74px 16px 0; display: flex; flex-direction: column; gap: 10px; }
+.lock-scr .time { text-align: center; font-size: 68px; font-weight: 600; line-height: 1; font-variant-numeric: tabular-nums; }
+.lock-scr .date { text-align: center; opacity: .8; margin-bottom: 26px; }
+.notif { background: rgba(255,255,255,.14); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); border-radius: 20px; padding: 12px 14px; display: flex; gap: 10px;
+  animation: notif .55s cubic-bezier(.2,.8,.2,1) both; }
+.notif .app { width: 34px; height: 34px; border-radius: 9px; background: var(--accent); display: grid; place-items: center; flex: none; color: var(--on-accent); }
+.notif .app svg { width: 20px; height: 20px; }
+.notif b { font-size: 14px; } .notif p { font-size: 13.5px; opacity: .92; }
+.notif small { margin-left: auto; opacity: .6; font-size: 11.5px; flex: none; }
+.notif.red { background: rgba(192,49,27,.55); }
+@keyframes notif { from { opacity: 0; transform: translateY(-16px) scale(.96); } to { opacity: 1; transform: none; } }
+.wait { text-align: center; opacity: .7; font-size: 13.5px; padding: 10px; }
+
+/* ---------- design system ---------- */
+.section { display: flex; flex-direction: column; gap: 16px; }
+.section > h2 { font-size: 24px; font-weight: 700; letter-spacing: -.01em; }
+.grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 12px; }
+.sw { border-radius: 14px; overflow: hidden; background: var(--surface); border: 1px solid var(--divider); }
+.sw i { display: block; height: 64px; }
+.sw div { padding: 10px 12px; font-size: 13px; display: flex; flex-direction: column; gap: 2px; }
+.sw code { font-size: 12px; color: var(--ink2); }
+.type-row { display: flex; align-items: baseline; gap: 16px; padding: 10px 0; border-bottom: 1px solid var(--divider); flex-wrap: wrap; }
+.type-row small { width: 92px; color: var(--ink2); font-size: 12px; flex: none; }
+.demo { background: var(--screen); border: 1px solid var(--divider); border-radius: 20px; padding: 20px; display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; }
+.demo .btn, .demo .checkin { max-width: 320px; }
+.rules { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 12px; }
+.rules div { background: var(--surface); border: 1px solid var(--divider); border-radius: 14px; padding: 14px 16px; display: flex; flex-direction: column; gap: 4px; }
+.rules b { font-size: 15px; }
+.rules span { font-size: 13.5px; color: var(--ink2); }
+
+
+/* --- alignment and richness pass --- */
+.body > * { flex-shrink: 0; }
+.hero .txt { max-width: 66%; }
+.checkin { flex-direction: column; gap: 3px; text-align: center; padding: 14px 18px; }
+.checkin .tick { display: none; }
+.checkin.done { flex-direction: row; gap: 14px; text-align: left; }
+.checkin.done .tick { display: block; }
+.checkin .ci-t { display: block; font-size: calc(var(--ts) * 24px); font-weight: 700; line-height: 1.15; }
+.checkin small { font-size: calc(var(--ts) * 13.5px); }
+#ci-label { display: block; }
+.wm { font-family: var(--font-mark); font-weight: 700; font-size: 22px; color: var(--accent); line-height: 1; }
+.hero { position: relative; overflow: hidden; border-radius: 22px; background: linear-gradient(135deg, var(--tint), var(--gold-tint)); border: 1px solid var(--divider);
+  padding: 18px 16px; min-height: 124px; display: flex; align-items: flex-start; }
+.hero .txt { position: relative; z-index: 1; max-width: 64%; }
+.hero-art { position: absolute; right: -8px; bottom: 0; width: 138px; height: 108px; }
+.mini { width: 56px; height: 56px; flex: none; }
+.who { display: flex; align-items: center; gap: 10px; }
+.av { width: 40px; height: 40px; border-radius: 50%; color: #fff; display: grid; place-items: center; font-style: normal; font-weight: 700; font-size: 17px; flex: none; }
+.grp { display: inline-flex; align-items: center; gap: 8px; min-width: 0; }
+.ic { width: 44px; height: 44px; border-radius: 12px; background: var(--tint); color: var(--accent); display: grid; place-items: center; flex: none; }
+.ic.gold { background: var(--gold-tint); color: var(--marigold); }
+.ic.sm { width: 36px; height: 36px; border-radius: 10px; }
+.ic svg { width: 22px; height: 22px; }
+.bolo { width: 58px; height: 58px; bottom: 92px; right: 16px; }
+.card { box-shadow: 0 1px 2px rgba(19,32,31,.04); }
+@media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation-duration: .001s !important; animation-iteration-count: 1 !important; transition-duration: .001s !important; } }
+.reduce *, .reduce *::before, .reduce *::after { animation-duration: .001s !important; animation-iteration-count: 1 !important; transition-duration: .001s !important; }
+</style>
+
+<!-- icon sprite -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <symbol id="i-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4.2" fill="currentColor"/><path d="M12 2.5v2.4M12 19.1v2.4M2.5 12h2.4M19.1 12h2.4M5.3 5.3 7 7M17 17l1.7 1.7M18.7 5.3 17 7M7 17l-1.7 1.7"/></symbol>
+    <symbol id="i-people" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="3.2" fill="currentColor"/><path d="M5.5 20c0-3.6 3-5.8 6.5-5.8s6.5 2.2 6.5 5.8" fill="currentColor"/><circle cx="4.6" cy="10" r="2.2"/><circle cx="19.4" cy="10" r="2.2"/></symbol>
+    <symbol id="i-hands" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20.5s-8-4.7-8-10.6A4.4 4.4 0 0 1 12 7.6a4.4 4.4 0 0 1 8 2.3c0 5.9-8 10.6-8 10.6z" fill="currentColor"/></symbol>
+    <symbol id="i-person" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4" fill="currentColor"/><path d="M4.5 20.5c0-4 3.4-6.4 7.5-6.4s7.5 2.4 7.5 6.4" fill="currentColor"/></symbol>
+    <symbol id="i-mic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="8.5" y="2.5" width="7" height="12" rx="3.5" fill="currentColor"/><path d="M5 11.5a7 7 0 0 0 14 0M12 18.5V22"/></symbol>
+    <symbol id="i-speaker" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9.5h3.5L12 5.5v13l-4.5-4H4z" fill="currentColor"/><path d="M15.5 9a4 4 0 0 1 0 6M18 6.5a7.5 7.5 0 0 1 0 11"/></symbol>
+    <symbol id="i-play" viewBox="0 0 24 24" fill="currentColor"><path d="M7 4.5v15l13-7.5z"/></symbol>
+    <symbol id="i-pause" viewBox="0 0 24 24" fill="currentColor"><rect x="6" y="4.5" width="4.2" height="15" rx="1.2"/><rect x="13.8" y="4.5" width="4.2" height="15" rx="1.2"/></symbol>
+    <symbol id="i-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="m9 5 7 7-7 7"/></symbol>
+    <symbol id="i-back" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="m15 5-7 7 7 7"/></symbol>
+    <symbol id="i-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12.5 4.5 4.5L19 7.5"/></symbol>
+    <symbol id="i-lock" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="10.5" width="14" height="10" rx="2.5" fill="currentColor"/><path d="M8.5 10.5V8a3.5 3.5 0 0 1 7 0v2.5"/></symbol>
+    <symbol id="i-book" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H20v16H6.5A2.5 2.5 0 0 0 4 21.5z" fill="currentColor"/><path d="M4 21.5V5.5"/></symbol>
+    <symbol id="i-calc" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="5" y="2.5" width="14" height="19" rx="3" fill="currentColor"/><path d="M8.5 8h7" stroke="var(--surface)"/></symbol>
+    <symbol id="i-heart" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12h4l2.5-6 4 12L16 12h5"/></symbol>
+    <symbol id="i-lotus" viewBox="0 0 24 24" fill="currentColor"><path d="M12 3c2.4 2.6 3.6 5.2 3.6 8 0 2.2-1.2 4.2-3.6 5.6C9.6 15.2 8.4 13.2 8.4 11c0-2.8 1.2-5.4 3.6-8zM3 9c3 .2 5.4 1.4 6.8 3.4-1 2.6-3.2 4.4-6.6 4.6C2.6 14.4 2.4 11.8 3 9zM21 9c.6 2.8.4 5.4-.2 8-3.4-.2-5.6-2-6.6-4.6C15.6 10.4 18 9.2 21 9zM6 19.5c2.4-.6 4.4-.4 6 .5 1.6-.9 3.6-1.1 6-.5" opacity=".95"/></symbol>
+    <symbol id="i-mic-s" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 5.5h18v11H9l-4 3.5v-3.5H3z" fill="currentColor"/></symbol>
+    <symbol id="i-shield" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 4.5 6v5.5c0 4.6 3.2 8.2 7.5 9.5 4.3-1.3 7.5-4.9 7.5-9.5V6z" fill="currentColor"/></symbol>
+    <symbol id="i-gear" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="3" fill="currentColor"/><path d="M12 2.5v3M12 18.5v3M2.5 12h3M18.5 12h3M5.3 5.3l2.1 2.1M16.6 16.6l2.1 2.1M18.7 5.3l-2.1 2.1M7.4 16.6l-2.1 2.1"/></symbol>
+    <symbol id="i-family" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="7" r="3" fill="currentColor"/><circle cx="17" cy="9" r="2.4" fill="currentColor"/><path d="M2.5 20c0-3.6 2.6-5.6 5.5-5.6s5.5 2 5.5 5.6zM14.5 20c0-2.6 1.4-4.2 3.4-4.2 1.9 0 3.6 1.4 3.6 4.2z" fill="currentColor"/></symbol>
+    <symbol id="i-cross" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="m6 6 12 12M18 6 6 18"/></symbol>
+    <symbol id="i-bell" viewBox="0 0 24 24" fill="currentColor"><path d="M12 22a2.4 2.4 0 0 0 2.4-2.4H9.6A2.4 2.4 0 0 0 12 22zm7-6.5V11a7 7 0 0 0-5-6.7V3.5a2 2 0 0 0-4 0v.8A7 7 0 0 0 5 11v4.5l-1.8 1.8v1h17.6v-1z"/></symbol>
+  </defs>
+</svg>
+
+<div class="page">
+  <header class="top">
+    <div>
+      <h1><span>दूसरी पारी</span> · app preview</h1>
+      <p>A working mock of the Android and iPhone app. Tap through the startup, onboarding, four tabs and the tools. Everything on screen is example data; nothing here is a real pensioner's.</p>
+    </div>
+    <div class="tools" role="group" aria-label="Preview settings">
+      <button class="chip" id="replay">▶ Replay startup</button>
+      <button class="chip" id="lang-toggle" aria-pressed="false">हिन्दी</button>
+      <button class="chip" id="theme-toggle" aria-pressed="false">Dark</button>
+      <button class="chip" id="motion-toggle" aria-pressed="false">Reduce motion</button>
+    </div>
+  </header>
+
+  <div class="stage">
+    <div class="col">
+      <span class="cap">Sharma ji's phone</span>
+      <div class="fit" id="fit-main"><div class="phone" id="phone-main">
+        <div class="glass" id="glass">
+          <div class="island"></div>
+          <div class="statusbar"><span id="clock">8:12</span><span>5G ▮▮▮</span></div>
+
+          <!-- splash -->
+          <section class="splash" id="splash" aria-label="Startup">
+            <svg class="scene" viewBox="0 0 360 720" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+              <defs>
+                <radialGradient id="g-sun" cx=".38" cy=".32" r=".8"><stop offset="0" stop-color="#FFE9A8"/><stop offset=".55" stop-color="#F2B544"/><stop offset="1" stop-color="#D98A1F"/></radialGradient>
+                <radialGradient id="g-halo"><stop offset="0" stop-color="#FFD57A" stop-opacity=".55"/><stop offset="1" stop-color="#FFD57A" stop-opacity="0"/></radialGradient>
+                <clipPath id="c-sun"><circle cx="180" cy="470" r="62"/></clipPath>
+              </defs>
+              <g class="halo"><circle cx="180" cy="470" r="230" fill="url(#g-halo)"/>
+                <g stroke="#FFD57A" stroke-opacity=".28" stroke-width="2" stroke-linecap="round"><path d="M180 470 180 190M180 470 292 232M180 470 348 366M180 470 348 574M180 470 68 232M180 470 12 366"/></g></g>
+              <g class="sun">
+                <circle cx="180" cy="470" r="62" fill="url(#g-sun)"/>
+                <g clip-path="url(#c-sun)" fill="none" stroke="#7A4A08" stroke-opacity=".5" stroke-width="2.2" stroke-linecap="round" stroke-dasharray="5 5">
+                  <path d="M138 424c26 16 26 76 0 92"/><path d="M222 424c-26 16-26 76 0 92"/></g>
+              </g>
+              <g fill="#fff" fill-opacity=".9"><circle cx="40" cy="60" r="1.6"/><circle cx="310" cy="90" r="1.3"/><circle cx="90" cy="150" r="1.1"/><circle cx="270" cy="40" r="1.1"/><circle cx="330" cy="180" r="1.4"/></g>
+              <g class="bird" stroke="#fff" stroke-width="2.4" fill="none" stroke-linecap="round"><path d="M60 400q10-10 20 0M80 400q10-10 20 0"/></g>
+              <g class="bird b2" stroke="#fff" stroke-width="2" fill="none" stroke-linecap="round"><path d="M40 440q8-8 16 0M56 440q8-8 16 0"/></g>
+              <path class="hill2" d="M0 560c60-30 120-20 180 0s130 30 180 0v160H0z" fill="#053E39"/>
+              <path class="hill1" d="M0 610c70-34 130-10 200 6s110 10 160-14v118H0z" fill="#03292A"/>
+              <g fill="#021c1d"><path d="M64 626v-40M64 600l-14 12M64 590l12 10"/><rect x="290" y="602" width="34" height="8" rx="3"/><rect x="296" y="610" width="4" height="16"/><rect x="314" y="610" width="4" height="16"/></g>
+            </svg>
+            <div class="word">
+              <div class="mark" id="mark">दूसरी पारी</div>
+              <div class="en">Doosri Pari</div>
+              <div class="tag" id="tagline">Your second innings begins.</div>
+            </div>
+            <div class="skip">Tap to continue</div>
+          </section>
+
+          <!-- language -->
+          <section class="scr" id="lang">
+            <div class="body">
+              <div class="t-large" data-t="pick_lang">Choose your language</div>
+              <div class="t-call mut" data-t="pick_lang_sub">Tap a language. You can change it later.</div>
+              <div class="lang-grid" id="lang-grid"></div>
+              <button class="btn" data-go="size" style="margin-top:auto"><span data-t="next">Next</span><svg><use href="#i-chev"/></svg></button>
+            </div>
+          </section>
+
+          <!-- text size -->
+          <section class="scr" id="size">
+            <div class="bar"><button class="back" data-go="lang" data-back><svg width="22" height="22"><use href="#i-back"/></svg><span data-t="back">Back</span></button></div>
+            <div class="body">
+              <div class="t-large" data-t="can_read">Can you read this easily?</div>
+              <div class="sizes" id="sizes"></div>
+              <div class="t-cap" data-t="size_note">This sits on top of your phone's own text size.</div>
+              <button class="btn" data-go="welcome" style="margin-top:auto"><span data-t="next">Next</span><svg><use href="#i-chev"/></svg></button>
+            </div>
+          </section>
+
+          <!-- welcome -->
+          <section class="scr" id="welcome">
+            <div class="bar"><button class="back" data-go="size" data-back><svg width="22" height="22"><use href="#i-back"/></svg><span data-t="back">Back</span></button>
+              <button class="chip" style="min-height:40px"><svg width="20" height="20"><use href="#i-speaker"/></svg><span data-t="read_aloud">Read aloud</span></button></div>
+            <div class="body" style="gap:18px">
+              <svg viewBox="0 0 320 150" style="width:100%;height:auto" aria-hidden="true">
+                <rect width="320" height="150" rx="20" fill="var(--tint)"/>
+                <g><circle cx="160" cy="116" r="40" fill="var(--marigold)" opacity=".9"/><path d="M0 110c60-24 120-14 160 4s110 18 160-6v42H0z" fill="var(--accent)" opacity=".85"/>
+                <g fill="var(--surface)"><circle cx="118" cy="86" r="11"/><path d="M100 128c0-16 8-26 18-26s18 10 18 26z"/><circle cx="206" cy="84" r="11"/><path d="M188 128c0-16 8-26 18-26s18 10 18 26z"/></g>
+                <path d="M110 76c2-10 16-12 20-2" stroke="var(--ink2)" stroke-width="3" fill="none"/></g>
+              </svg>
+              <div class="hero-line"><i class="dot"></i><div class="t-title" data-t="w1">Meet colleagues from your batch again.</div></div>
+              <div class="hero-line"><i class="dot"></i><div class="t-title" data-t="w2">Ask pension questions and get the rule quoted.</div></div>
+              <div class="hero-line"><i class="dot"></i><div class="t-title" data-t="w3">Stay well, and let your family know you are.</div></div>
+              <div class="legal" data-t="indep">Doosri Pari is an independent app. It is not run by the Government.</div>
+              <button class="btn" data-go="otp" style="margin-top:auto"><span data-t="start">Get started</span><svg><use href="#i-chev"/></svg></button>
+            </div>
+          </section>
+
+          <!-- otp -->
+          <section class="scr" id="otp">
+            <div class="bar"><button class="back" data-go="welcome" data-back><svg width="22" height="22"><use href="#i-back"/></svg><span data-t="back">Back</span></button></div>
+            <div class="body">
+              <div class="t-large" data-t="otp_t">Your mobile number</div>
+              <div class="field"><label>+91</label><input value="98•••• 4210" readonly aria-label="Mobile number"></div>
+              <div class="t-call mut" data-t="otp_sub">We sent a 6-digit code. It fills in by itself.</div>
+              <div class="otp" id="otp-boxes"><i></i><i></i><i></i><i></i><i></i><i></i></div>
+              <div class="t-cap">Sign in with Google or Apple is also offered on this screen.</div>
+              <button class="btn" data-go="home" style="margin-top:auto"><span data-t="verify">Continue</span><svg><use href="#i-chev"/></svg></button>
+            </div>
+          </section>
+
+          <!-- HOME / Aaj -->
+          <section class="scr" id="home">
+            <div class="bar"><span class="wm">दूसरी पारी</span><button class="sos" data-sos aria-label="SOS, hold for two seconds"><i></i>SOS</button></div>
+            <div class="body">
+              <div class="hero"><div class="txt"><div class="t-large" id="greet-line">Namaste, Sharma ji</div><div class="t-call mut" id="date-line" style="margin-top:6px">Tuesday, 14 October · Ekadashi</div></div>
+                <svg class="hero-art" viewBox="0 0 140 110" aria-hidden="true"><circle cx="92" cy="62" r="26" fill="var(--marigold)"/><g stroke="var(--marigold)" stroke-width="3" stroke-linecap="round" opacity=".55"><path d="M92 22v10M126 36l-7 7M138 62h-10M58 36l7 7M46 62h10"/></g><path d="M0 92c30-14 60-10 90 0s40 8 50-2v20H0z" fill="var(--accent)"/><path d="M0 102c34-10 70-6 100 2s30 2 40-2v8H0z" fill="var(--accent)" opacity=".7"/></svg></div>
+              <button class="checkin" id="checkin" aria-live="polite">
+                <svg class="tick" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12.5 4.5 4.5L19 7.5"/></svg>
+                <span id="ci-label"><span class="ci-t" data-t="im_fine">Main theek hoon</span><small id="ci-sub" data-t="window">I'm fine · window 9:00 to 12:00</small></span>
+              </button>
+              <div class="card">
+                <h3 data-t="pension">Pension</h3>
+                <div class="kv"><span class="t-body" data-t="dr_line">Dearness relief</span><span class="big-num">58%</span></div>
+                <div class="t-cap" data-t="credit_line">Credits on the 1st · rate from the DoPPW order, July</div>
+                <button class="row" data-go="toolkit" style="min-height:56px"><span class="ic"><svg><use href="#i-calc"/></svg></span><span class="tx"><b data-t="calc">Work out my arrears</b><span data-t="calc_sub">Stays on this phone</span></span><svg class="chev"><use href="#i-chev"/></svg></button>
+              </div>
+              <div class="card">
+                <h3 data-t="practice">Today's practice</h3>
+                <div class="kv" style="gap:12px"><svg class="mini" viewBox="0 0 56 56" aria-hidden="true"><circle cx="28" cy="28" r="28" fill="var(--gold-tint)"/><path d="M10 54c2-10 9-14 18-14s16 4 18 14z" fill="var(--accent)"/><circle cx="28" cy="30" r="12" fill="#E9BE9A"/><path d="M16 28c0-9 6-14 12-14s12 5 12 14c-3-5-7-7-12-7s-9 2-12 7z" fill="#DADCDC"/><circle cx="28" cy="14" r="6" fill="#DADCDC"/></svg><div style="flex:1;min-width:0"><div class="t-head" data-t="chair_yoga">Chair yoga</div><div class="t-cap">10 min · Gentle · with Dadi</div></div>
+                  <button class="play" data-go="yoga" aria-label="Start chair yoga"><svg><use href="#i-play"/></svg></button></div>
+              </div>
+              <div class="card">
+                <h3 data-t="circles">From your circles</h3>
+                <button class="t-call" data-tab="saathi" style="text-align:left"><b>Railways 2019–21</b> · 3 new posts<br><span class="mut">Verma ji: "Reunion at the Charbagh canteen?"</span></button>
+                <div class="live" style="padding:12px 14px"><span class="eq" aria-hidden="true"><i></i><i></i><i></i><i></i></span><div class="t-call"><b>Sham ke bhajan</b><br><span class="mut">41 listening</span></div></div>
+              </div>
+              <div class="card" style="background:var(--safety-tint);border-color:transparent">
+                <h3 style="color:var(--safety)" data-t="scam">Scam alert this week</h3>
+                <div class="t-call"><b>Fake "pension office" calls.</b> Nobody from a pension office asks for your OTP.</div>
+              </div>
+              <div class="card">
+                <h3 data-t="weather">Weather and air</h3>
+                <div class="wx"><svg viewBox="0 0 48 48"><circle cx="20" cy="22" r="9" fill="var(--marigold)"/><path d="M14 38a8 8 0 0 1 1-16 11 11 0 0 1 21 3 6.5 6.5 0 0 1-1 13z" fill="var(--surface)" stroke="var(--divider)" stroke-width="2"/></svg>
+                  <div class="t-body"><b>29°</b> Lucknow, partly cloudy<br><span class="t-cap">Air: Moderate (84)</span></div></div>
+              </div>
+              <div style="height:96px"></div>
+            </div>
+          </section>
+
+          <!-- SAATHI -->
+          <section class="scr" id="saathi">
+            <div class="bar"><div class="t-title" data-t="tab_saathi">Saathi</div><button class="sos" data-sos aria-label="SOS, hold for two seconds"><i></i>SOS</button></div>
+            <div class="body">
+              <div class="chips" role="tablist"><button class="chip on">Railways 2019–21</button><button class="chip">Lucknow</button><button class="chip">Ghazals</button><button class="chip">Walking club</button></div>
+              <div class="live"><span class="eq" aria-hidden="true"><i></i><i></i><i></i><i></i></span><div style="flex:1"><div class="t-head">Sham ke bhajan</div><div class="t-cap">Chai pe Charcha · 41 listening</div></div><button class="pill" style="min-height:44px;padding:0 16px">Join</button></div>
+              <article class="card post">
+                <svg class="art" viewBox="0 0 320 150" aria-label="Illustration: a morning walk in a park"><rect width="320" height="150" fill="#CFE7E3"/><circle cx="256" cy="46" r="20" fill="#F2B544"/><path d="M0 108c50-18 100-10 160 4s110 6 160-10v48H0z" fill="#7FB8AE"/><path d="M0 128c60-14 120-6 170 6s100 4 150-4v20H0z" fill="#3E8C80"/><g fill="#2E6F65"><rect x="46" y="70" width="6" height="40"/><circle cx="49" cy="66" r="20"/><rect x="246" y="78" width="6" height="34"/><circle cx="249" cy="74" r="16"/></g><g fill="#13201F" opacity=".75"><circle cx="140" cy="96" r="6"/><rect x="135" y="102" width="10" height="20" rx="4"/><circle cx="162" cy="98" r="5.5"/><rect x="157" y="103" width="9" height="19" rx="4"/></g><rect x="20" y="116" width="60" height="5" rx="2" fill="#8A5A2B"/></svg>
+                <div class="pad"><div class="who"><i class="av" style="background:#0B6E66">V</i><div class="t-cap"><b>Verma ji</b> · Railways 2019–21<br>2 h ago</div></div><div class="t-body">Morning walk at Nehru Park. Six of us today. Come along on Sunday?</div>
+                  <div style="display:flex;gap:10px;align-items:center;margin-top:4px"><button class="nam" id="nam1" aria-pressed="false"><svg><use href="#i-lotus"/></svg><span data-t="namaste">Namaste</span> <span id="nam1n">12</span></button><span class="t-cap">4 comments</span></div></div>
+              </article>
+              <article class="card post"><div class="pad"><div class="who"><i class="av" style="background:#B97700">I</i><div class="t-cap"><b>Mrs. Iyer</b> · Ghazals<br>yesterday</div></div><div class="t-body">Poll: Which ghazal night should we host this month?</div>
+                <div class="list"><div class="row" style="min-height:52px"><span class="tx"><b>Mehdi Hassan</b></span><span class="pill">9</span></div><div class="row" style="min-height:52px"><span class="tx"><b>Jagjit Singh</b></span><span class="pill">14</span></div></div></div></article>
+              <div class="t-cap" style="text-align:center;padding:8px">You're all caught up. See you tomorrow.</div>
+              <div style="height:96px"></div>
+            </div>
+          </section>
+
+          <!-- SEVA -->
+          <section class="scr" id="seva">
+            <div class="bar"><div class="t-title">Seva</div><button class="sos" data-sos aria-label="SOS, hold for two seconds"><i></i>SOS</button></div>
+            <div class="body">
+              <div class="t-call mut" data-t="seva_sub">Share what you know, or find help nearby.</div>
+              <div class="chips"><button class="chip on">All</button><button class="chip">Mentoring</button><button class="chip">Skills</button><button class="chip">Help</button><button class="chip">Work</button></div>
+              <div class="warn"><svg width="20" height="20"><use href="#i-shield"/></svg> Never pay to get work</div>
+              <div class="card"><div class="kv"><span class="grp"><span class="ic sm gold"><svg><use href="#i-book"/></svg></span><span class="pill gold">Mentoring · paid</span></span><span class="stars">★ 4.8</span></div><div class="t-head">Essay writing for UPSC aspirants</div><div class="t-cap">Col. (Retd.) Kaur · online · Hindi, English</div><div class="kv"><span class="t-body"><b>₹300</b> per session</span><button class="pill" style="min-height:44px;padding:0 16px">Book</button></div></div>
+              <div class="card"><div class="kv"><span class="grp"><span class="ic sm"><svg><use href="#i-hands"/></svg></span><span class="pill ok">Help · free</span></span><span class="t-cap">Near you · 2 km</span></div><div class="t-head">Need help filing my ITR this July</div><div class="t-cap">Posted by Mrs. Gupta · Gomti Nagar</div><button class="btn sec" style="min-height:52px">I can help</button></div>
+              <div class="card"><div class="kv"><span class="grp"><span class="ic sm"><svg><use href="#i-people"/></svg></span><span class="pill">Volunteer</span></span><span class="pill ok">Verified NGO</span></div><div class="t-head">Reading hour at a village school</div><div class="t-cap">Saturdays, 10 to 11 am · Barabanki</div></div>
+              <button class="btn line" style="min-height:56px">＋ Offer my time</button>
+              <div style="height:96px"></div>
+            </div>
+          </section>
+
+          <!-- ME -->
+          <section class="scr" id="me">
+            <div class="bar"><div class="t-title">Main</div><button class="sos" data-sos aria-label="SOS, hold for two seconds"><i></i>SOS</button></div>
+            <div class="body">
+              <div class="card" style="flex-direction:row;align-items:center;gap:14px"><svg width="56" height="56" viewBox="0 0 56 56"><circle cx="28" cy="28" r="28" fill="var(--tint)"/><circle cx="28" cy="22" r="9" fill="var(--accent)"/><path d="M10 50c2-10 10-14 18-14s16 4 18 14" fill="var(--accent)"/></svg>
+                <div><div class="t-head" id="me-name">Sharma ji</div><div class="t-cap">Retired Section Officer · Railways</div><span class="pill ok" style="margin-top:4px">Verified pensioner</span></div></div>
+              <button class="row" data-go="sahayak"><span class="ic"><svg><use href="#i-mic-s"/></svg></span><span class="tx"><b data-t="sahayak">Pension Sahayak</b><span data-t="sahayak_sub">Ask; get the rule and its source</span></span><svg class="chev"><use href="#i-chev"/></svg></button>
+              <button class="row" data-go="toolkit"><span class="ic"><svg><use href="#i-calc"/></svg></span><span class="tx"><b>Pension toolkit</b><span>Calculators, reminders, grievance</span></span><svg class="chev"><use href="#i-chev"/></svg></button>
+              <button class="row"><span class="ic"><svg><use href="#i-lock"/></svg></span><span class="tx"><b>Document safe</b><span>Locked with your fingerprint</span></span><svg class="chev"><use href="#i-chev"/></svg></button>
+              <button class="row"><span class="ic"><svg><use href="#i-heart"/></svg></span><span class="tx"><b>Health</b><span>Medicines, readings, hospitals</span></span><svg class="chev"><use href="#i-chev"/></svg></button>
+              <button class="row" data-go="yoga"><span class="ic gold"><svg><use href="#i-lotus"/></svg></span><span class="tx"><b>Yog and Adhyatm Kendra</b><span>Chair yoga, breathing, japa, aarti</span></span><svg class="chev"><use href="#i-chev"/></svg></button>
+              <button class="row"><span class="ic"><svg><use href="#i-mic-s"/></svg></span><span class="tx"><b>Meri Kahani</b><span>Record your story, make a book</span></span><svg class="chev"><use href="#i-chev"/></svg></button>
+              <button class="row"><span class="ic"><svg><use href="#i-book"/></svg></span><span class="tx"><b>Seekho</b><span>Phone, UPI safety, life certificate</span></span><svg class="chev"><use href="#i-chev"/></svg></button>
+              <button class="row"><span class="ic"><svg><use href="#i-family"/></svg></span><span class="tx"><b>Family</b><span>2 guardians · check-in on</span></span><svg class="chev"><use href="#i-chev"/></svg></button>
+              <button class="row"><span class="ic"><svg><use href="#i-gear"/></svg></span><span class="tx"><b>Settings</b><span>Language, text size, notifications</span></span><svg class="chev"><use href="#i-chev"/></svg></button>
+              <div class="legal" data-t="indep">Doosri Pari is an independent app. It is not run by the Government.</div>
+              <div style="height:96px"></div>
+            </div>
+          </section>
+
+          <!-- SAHAYAK -->
+          <section class="scr" id="sahayak">
+            <div class="bar"><button class="back" data-go="me" data-back><svg width="22" height="22"><use href="#i-back"/></svg><span data-t="back">Back</span></button><div class="t-head" data-t="sahayak">Pension Sahayak</div><span style="width:60px"></span></div>
+            <div class="body">
+              <div class="bubble">Mera DA arrears kitna banega?</div>
+              <div class="answer" id="ans">
+                <div class="t-body" id="ans-text"></div>
+                <div id="ans-more" hidden>
+                  <div class="t-cap" style="margin-bottom:6px">Sources</div>
+                  <button class="src"><span>DoPPW O.M. · dearness relief · July</span><svg><use href="#i-chev"/></svg></button>
+                  <button class="src" style="margin-top:6px"><span>CCS (Pension) Rules, 2021 · Rule 44</span><svg><use href="#i-chev"/></svg></button>
+                  <button class="btn" data-go="toolkit" style="margin-top:12px"><svg><use href="#i-calc"/></svg><span data-t="open_calc">Open the calculator</span></button>
+                  <div class="fb" style="margin-top:10px"><button class="chip">Helpful</button><button class="chip">Not helpful</button><button class="chip">Ask a volunteer</button></div>
+                  <div class="t-cap" style="margin-top:10px">General information from the rules, not legal or financial advice. Confirm your own case with your pension disbursing bank or Pay and Accounts Office. Independent app, not affiliated with any government department.</div>
+                </div>
+              </div>
+              <div class="t-cap" style="text-align:center">Sample answer for this preview</div>
+            </div>
+          </section>
+
+          <!-- TOOLKIT -->
+          <section class="scr" id="toolkit">
+            <div class="bar"><button class="back" data-go="me" data-back><svg width="22" height="22"><use href="#i-back"/></svg><span data-t="back">Back</span></button><div class="t-head">DA arrears</div><span style="width:60px"></span></div>
+            <div class="body">
+              <div class="field"><label for="f-basic">Basic pension (₹ a month)</label><input id="f-basic" type="number" inputmode="numeric" value="30000"></div>
+              <div class="two"><div class="field"><label for="f-old">Old DR %</label><input id="f-old" type="number" inputmode="decimal" value="53"></div><div class="field"><label for="f-new">New DR %</label><input id="f-new" type="number" inputmode="decimal" value="55"></div></div>
+              <div class="field"><label for="f-mo">Months of arrears</label><input id="f-mo" type="number" inputmode="numeric" value="3"></div>
+              <div class="result"><div class="t-cap">Your arrears, about</div><div class="big-num" id="r-arrears">₹1,800</div><div class="t-call">New pension <b id="r-new">₹46,500</b> a month</div><div class="t-cap">Estimate only. Example figures, not yours.</div></div>
+              <div class="lock"><svg><use href="#i-lock"/></svg><span>Your pension figures stay on this phone. They are never sent to us.</span></div>
+            </div>
+          </section>
+
+          <!-- YOGA -->
+          <section class="scr" id="yoga">
+            <div class="bar"><button class="back" data-go="home" data-back style="color:var(--ink2)"><svg width="22" height="22"><use href="#i-cross"/></svg><span>Close</span></button><div class="t-head" id="y-title">Chair yoga</div><button class="chip" style="min-height:40px" aria-label="Sound"><svg width="20" height="20"><use href="#i-speaker"/></svg></button></div>
+            <div class="body" style="gap:10px">
+              <div class="seg"><button id="seg-y" aria-pressed="true">Chair yoga</button><button id="seg-b" aria-pressed="false">Breathe</button></div>
+              <div id="pane-y" style="display:flex;flex-direction:column;gap:10px">
+                <div class="progress" aria-label="Progress"><i id="y-prog"></i></div>
+                <div class="kv"><span class="t-cap" id="y-count">1 of 3</span><span class="pill" id="y-chip">Dadi</span></div>
+                <div class="stage-y">
+                  <svg class="inst p0" id="inst" viewBox="40 56 220 250" aria-label="Illustration: an instructor guiding a seated stretch">
+                    <ellipse cx="150" cy="188" rx="98" ry="98" class="glow" fill="var(--marigold)" opacity=".4"/>
+                    <!-- chair -->
+                    <g fill="#8A5A2B"><rect x="92" y="262" width="116" height="10" rx="4"/><rect x="98" y="272" width="8" height="26"/><rect x="194" y="272" width="8" height="26"/><rect x="92" y="196" width="8" height="70" rx="3"/></g>
+                    <g class="torso">
+                      <!-- body: kurta -->
+                      <path d="M112 236c-2-42 8-64 38-64s40 22 38 64z" id="kurta" fill="var(--accent)"/>
+                      <path d="M112 236h76l6 36H106z" fill="var(--accent)" opacity=".85"/>
+                      <path d="M136 172c6 8 22 8 28 0" stroke="var(--surface)" stroke-width="3" fill="none"/>
+                      <!-- head -->
+                      <circle cx="150" cy="140" r="26" fill="#E9BE9A"/>
+                      <path id="hair" d="M124 136c0-18 12-28 26-28s26 10 26 28c-6-10-16-14-26-14s-20 4-26 14z" fill="#DADCDC"/>
+                      <circle id="bun" cx="150" cy="104" r="11" fill="#DADCDC"/>
+                      <circle cx="141" cy="142" r="2.3" fill="#3a2a20"/><circle cx="159" cy="142" r="2.3" fill="#3a2a20"/>
+                      <path d="M143 152q7 6 14 0" stroke="#9c5a48" stroke-width="2.4" fill="none" stroke-linecap="round"/>
+                      <circle cx="150" cy="131" r="3" fill="#C0311B" opacity=".9"/>
+                      <!-- arms: pivot at shoulders -->
+                      <g class="arm-l"><path d="M122 200c-14 14-18 34-16 50" stroke="#E9BE9A" stroke-width="12" stroke-linecap="round" fill="none"/><path d="M122 200c-6 6-9 12-11 20" stroke="var(--accent)" stroke-width="16" stroke-linecap="round" fill="none"/></g>
+                      <g class="arm-r"><path d="M178 200c14 14 18 34 16 50" stroke="#E9BE9A" stroke-width="12" stroke-linecap="round" fill="none"/><path d="M178 200c6 6 9 12 11 20" stroke="var(--accent)" stroke-width="16" stroke-linecap="round" fill="none"/></g>
+                    </g>
+                    <!-- legs -->
+                    <g><path d="M120 262l-4 30" stroke="#33413F" stroke-width="14" stroke-linecap="round"/><path d="M180 262l4 30" stroke="#33413F" stroke-width="14" stroke-linecap="round"/><ellipse cx="114" cy="298" rx="14" ry="5" fill="#B97700"/><ellipse cx="186" cy="298" rx="14" ry="5" fill="#B97700"/></g>
+                  </svg>
+                </div>
+                <div class="t-title" id="y-step">Seated side stretch</div>
+                <div class="t-call mut" id="y-hold">Hold · 12 seconds</div>
+                <div class="t-body" id="y-cap" style="min-height:66px">"Reach your right arm up and over. Only as far as feels comfortable."</div>
+                <div class="ctrl"><button class="btn sec" id="y-back"><svg><use href="#i-back"/></svg>Back</button><button class="btn" id="y-pause"><svg id="y-pi"><use href="#i-pause"/></svg><span id="y-pt">Pause</span></button><button class="btn sec" id="y-next">Next<svg><use href="#i-chev"/></svg></button></div>
+                <div class="t-cap" style="text-align:center">Stop if you feel pain or dizziness.</div>
+                <div class="seg" style="grid-template-columns:1fr 1fr"><button id="who-dadi" aria-pressed="true">Dadi</button><button id="who-dada" aria-pressed="false">Dada</button></div>
+              </div>
+              <div id="pane-b" hidden style="display:none;flex-direction:column;gap:10px">
+                <div class="orb-wrap"><div class="orb"></div><div class="orb-txt" id="orb-txt">Breathe in</div></div>
+                <div class="t-title" style="text-align:center">Slow breathing · 8 min</div>
+                <div class="t-call mut" style="text-align:center">Follow the glow. Let your shoulders drop.</div>
+                <div class="fb" style="justify-content:center"><button class="chip">Sleep</button><button class="chip">Worry</button><button class="chip">Gratitude</button><button class="chip">Rain sounds</button></div>
+              </div>
+            </div>
+          </section>
+
+          <!-- SOS -->
+          <section class="scr sos-scr" id="sosScr">
+            <div class="body" style="align-items:center;text-align:center;gap:14px;padding-top:26px">
+              <div class="t-title" style="color:var(--safety)" id="sos-title">Sending SOS in…</div>
+              <div class="ring" id="ring"><svg viewBox="0 0 200 200"><circle class="trk" cx="100" cy="100" r="90" fill="none" stroke-width="12"/><circle class="prg" cx="100" cy="100" r="90" fill="none" stroke-width="12"/></svg><b id="sos-n">5</b></div>
+              <div class="t-body" id="sos-msg">Your family and helpers will get your location.</div>
+              <div class="report" id="sos-report" hidden>
+                <div><span>Priya (daughter)</span><b>push ✓ · SMS ✓</b></div>
+                <div><span>Rohit (son)</span><b>push ✓ · WhatsApp ✓</b></div>
+                <div><span>Neighbour, Mr. Khan</span><b>SMS ✓</b></div>
+                <button class="btn line" style="min-height:52px" id="sos-safe">I'm safe now</button>
+                <button class="btn danger" style="min-height:60px"><svg><use href="#i-bell"/></svg>Call 112</button>
+              </div>
+              <button class="btn line" id="sos-cancel" style="margin-top:auto;min-height:64px;border-color:var(--safety);color:var(--safety)">Cancel</button>
+              <div class="t-cap">SOS does not replace 112.</div>
+            </div>
+          </section>
+
+          <!-- chrome -->
+          <nav class="tabbar" id="tabbar" aria-label="Main">
+            <button class="tab" role="tab" data-tab="home"><svg><use href="#i-sun"/></svg><span data-t="tab_home">Aaj</span></button>
+            <button class="tab" role="tab" data-tab="saathi"><svg><use href="#i-people"/></svg><span data-t="tab_saathi">Saathi</span></button>
+            <button class="tab" role="tab" data-tab="seva"><svg><use href="#i-hands"/></svg><span>Seva</span></button>
+            <button class="tab" role="tab" data-tab="me"><svg><use href="#i-person"/></svg><span data-t="tab_me">Main</span></button>
+          </nav>
+          <button class="bolo" id="bolo" aria-label="Bolo, speak to the app"><svg><use href="#i-mic"/></svg>Bolo</button>
+
+          <div class="sheet-bg" id="sheet-bg"></div>
+          <div class="sheet" id="sheet" role="dialog" aria-label="Bolo">
+            <div class="grab"></div>
+            <div class="wave" id="wave"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+            <div class="heard" id="heard" aria-live="polite">Listening…</div>
+            <div class="route" id="route" hidden></div>
+            <div class="chips" id="bolo-eg"><button class="chip" data-eg="0">Beti ko call karo</button><button class="chip" data-eg="1">Mera DA arrears kitna banega?</button><button class="chip" data-eg="2">Shaam 8 baje BP ki dawai</button></div>
+            <button class="btn line" id="sheet-close" style="min-height:52px">Close</button>
+          </div>
+        </div>
+      </div></div>
+    </div>
+
+    <div class="col">
+      <span class="cap">Priya's phone (Sharma ji's daughter)</span>
+      <div class="fit" id="fit-fam"><div class="phone" id="phone-fam">
+        <div class="glass" style="background:#0b1418">
+          <div class="island"></div>
+          <div class="statusbar" style="color:#fff"><span>8:12</span><span>Pune</span></div>
+          <div class="lock-scr">
+            <div class="time" id="fam-time">8:12</div>
+            <div class="date">Tuesday, 14 October</div>
+            <div class="wait" id="fam-wait">Waiting for Sharma ji's check-in.<br>Window 9:00 to 12:00. You will hear only if something is wrong, or when it is fine after a worry.</div>
+            <div id="fam-feed" style="display:flex;flex-direction:column;gap:10px"></div>
+            <button class="chip" id="fam-reset" style="align-self:center;margin-top:auto;margin-bottom:24px;background:rgba(255,255,255,.14);color:#fff;border-color:transparent">Clear</button>
+          </div>
+        </div>
+      </div></div>
+      <p class="note" style="max-width:34ch;text-align:center">Tap check-in or hold SOS on the left phone and watch this one.</p>
+    </div>
+
+    <aside class="index" aria-label="Screens">
+      <h2>Jump to a screen</h2>
+      <div class="jump" id="jump"></div>
+    </aside>
+  </div>
+
+  <section class="section" aria-labelledby="ds">
+    <h2 id="ds">The look</h2>
+    <p class="mut" style="max-width:62ch">Quiet, warm and dignified. One teal action per screen, large type that still grows with the phone's setting, and glass only on the floating tab bar and Bolo. Content sits on solid, high-contrast surfaces.</p>
+    <div class="grid">
+      <div class="sw"><i style="background:var(--accent)"></i><div><b>Accent teal</b><code>#0B6E66 · dark #6FD3C9</code><span class="note">The main action, selected tab</span></div></div>
+      <div class="sw"><i style="background:var(--marigold)"></i><div><b>Marigold</b><code>#B97700 · dark #F2B544</code><span class="note">Spiritual centre, highlights</span></div></div>
+      <div class="sw"><i style="background:var(--ok)"></i><div><b>OK green</b><code>#1E7A34 · dark #7BD38B</code><span class="note">"I'm fine", success</span></div></div>
+      <div class="sw"><i style="background:var(--safety)"></i><div><b>Safety red</b><code>#C0311B · dark #FF8A73</code><span class="note">SOS and a missed check-in only</span></div></div>
+      <div class="sw"><i style="background:var(--ink)"></i><div><b>Ink</b><code>#13201F · dark #EEF3F2</code><span class="note">Text, 7:1 or better</span></div></div>
+      <div class="sw"><i style="background:var(--screen);border-bottom:1px solid var(--divider)"></i><div><b>Background</b><code>#FAFAF7 · dark #0F1414</code><span class="note">Screens</span></div></div>
+    </div>
+    <div>
+      <div class="type-row"><small>Large title 36</small><span style="font-size:30px;font-weight:700">Namaste, Sharma ji</span></div>
+      <div class="type-row"><small>Title 28</small><span style="font-size:24px;font-weight:700">Today's practice</span></div>
+      <div class="type-row"><small>Headline 22</small><span style="font-size:20px;font-weight:600">Seated side stretch</span></div>
+      <div class="type-row"><small>Body 20</small><span style="font-size:18px">Reach your right arm up and over, only as far as feels comfortable.</span></div>
+      <div class="type-row"><small>Smallest 16</small><span style="font-size:15px;color:var(--ink2)">Estimate only. Confirm with your Pay and Accounts Office.</span></div>
+      <div class="type-row"><small>Mark</small><span style="font-family:var(--font-mark);font-size:34px;font-weight:700;color:var(--accent)">दूसरी पारी</span></div>
+      <p class="note" style="margin-top:8px">Sizes shown are the preview's (scaled from the plan's points). No thin weights. Line height 1.4. Numbers use tabular figures.</p>
+    </div>
+    <div class="demo">
+      <div style="display:flex;flex-direction:column;gap:10px"><button class="btn"><svg><use href="#i-check"/></svg>Primary · 64 pt</button><button class="btn sec">Secondary · 56 pt</button><button class="btn line">Outlined</button></div>
+      <div style="display:flex;flex-direction:column;gap:10px"><button class="checkin" style="pointer-events:none"><svg class="tick" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8"><path d="m5 12.5 4.5 4.5L19 7.5" style="stroke-dashoffset:0"/></svg><span>Main theek hoon<small>Check-in · 96 pt</small></span></button><button class="btn danger" style="pointer-events:none">SOS · hold 2 s</button></div>
+      <div style="display:flex;flex-direction:column;gap:10px"><div class="row"><span class="ic"><svg><use href="#i-heart"/></svg></span><span class="tx"><b>List row · 64 pt</b><span>Icon, title, value, chevron</span></span><svg class="chev"><use href="#i-chev"/></svg></div><div style="display:flex;gap:8px;flex-wrap:wrap"><span class="pill">Verified</span><span class="pill gold">Paid</span><span class="pill ok">Free</span><span class="pill red">Missed</span></div></div>
+    </div>
+    <div class="rules">
+      <div><b>Four tabs, one word each</b><span>Aaj, Saathi, Seva, Main. SOS lives in the top bar and Bolo floats above the tab bar. Neither is a tab.</span></div>
+      <div><b>Every icon has a word</b><span>No bare icons, no swipe-only or long-press-only actions, and a visible back on every screen.</span></div>
+      <div><b>Confirm before anything outward</b><span>Voice never posts, calls, pays or sends an SOS on its own. It shows what it heard and asks.</span></div>
+      <div><b>Illustration carries the warmth</b><span>The drawn instructor, the breathing glow and circle art. Controls stay standard on each platform.</span></div>
+    </div>
+    <p class="note">No photographs are used yet. Every picture here is drawn in the app's own style, so nothing has been scraped or borrowed. Real photos can be added with credits when you choose a source.</p>
+  </section>
+</div>
+
+<script>
+(function () {
+  var $ = function (s, r) { return (r || document).querySelector(s); };
+  var $$ = function (s, r) { return Array.prototype.slice.call((r || document).querySelectorAll(s)); };
+  var root = document.documentElement;
+
+  /* ---------- copy: English and Hindi for the main screens ---------- */
+  var T = {
+    en: { pick_lang: 'Choose your language', pick_lang_sub: 'Tap a language. You can change it later.', next: 'Next', back: 'Back',
+      can_read: 'Can you read this easily?', size_note: "This sits on top of your phone's own text size.", read_aloud: 'Read aloud',
+      w1: 'Meet colleagues from your batch again.', w2: 'Ask pension questions and get the rule quoted.', w3: 'Stay well, and let your family know you are.',
+      indep: 'Doosri Pari is an independent app. It is not run by the Government.', start: 'Get started', otp_t: 'Your mobile number',
+      otp_sub: 'We sent a 6-digit code. It fills in by itself.', verify: 'Continue', im_fine: 'Main theek hoon', window: "I'm fine · window 9:00 to 12:00", told: 'Your family has been told',
+      pension: 'Pension', dr_line: 'Dearness relief', credit_line: 'Credits on the 1st · rate from the DoPPW order, July', calc: 'Work out my arrears',
+      calc_sub: 'Stays on this phone', practice: "Today's practice", chair_yoga: 'Chair yoga', circles: 'From your circles', scam: 'Scam alert this week',
+      weather: 'Weather and air', tab_home: 'Aaj', tab_saathi: 'Saathi', tab_me: 'Main', namaste: 'Namaste', seva_sub: 'Share what you know, or find help nearby.',
+      sahayak: 'Pension Sahayak', sahayak_sub: 'Ask; get the rule and its source', open_calc: 'Open the calculator',
+      greet: 'Namaste, Sharma ji', date: 'Tuesday, 14 October · Ekadashi', tag: 'Your second innings begins.', done: 'Checked in at 8:12' },
+    hi: { pick_lang: 'अपनी भाषा चुनिए', pick_lang_sub: 'किसी भाषा पर दबाइए। बाद में बदल सकते हैं।', next: 'आगे', back: 'पीछे',
+      can_read: 'क्या आप इसे आराम से पढ़ पा रहे हैं?', size_note: 'यह आपके फ़ोन के अपने अक्षर-आकार के ऊपर लगता है।', read_aloud: 'सुनाइए',
+      w1: 'अपने बैच के साथियों से फिर मिलिए।', w2: 'पेंशन के सवाल पूछिए, नियम के हवाले के साथ जवाब पाइए।', w3: 'स्वस्थ रहिए, और परिवार को बताते रहिए कि आप ठीक हैं।',
+      indep: 'दूसरी पारी एक स्वतंत्र ऐप है। इसे सरकार नहीं चलाती।', start: 'शुरू कीजिए', otp_t: 'आपका मोबाइल नंबर',
+      otp_sub: 'हमने 6 अंकों का कोड भेजा है। यह अपने आप भर जाएगा।', verify: 'आगे बढ़िए', im_fine: 'मैं ठीक हूँ', window: 'समय 9:00 से 12:00 · एक बार दबाइए', told: 'आपके परिवार को बता दिया गया है',
+      pension: 'पेंशन', dr_line: 'महँगाई राहत', credit_line: 'हर महीने की 1 तारीख़ · दर: DoPPW आदेश, जुलाई', calc: 'मेरा बकाया निकालिए',
+      calc_sub: 'यह इसी फ़ोन में रहता है', practice: 'आज का अभ्यास', chair_yoga: 'कुर्सी योग', circles: 'आपके सर्कल से', scam: 'इस हफ़्ते की ठगी की चेतावनी',
+      weather: 'मौसम और हवा', tab_home: 'आज', tab_saathi: 'साथी', tab_me: 'मैं', namaste: 'नमस्ते', seva_sub: 'जो आप जानते हैं वह बाँटिए, या पास में मदद पाइए।',
+      sahayak: 'पेंशन सहायक', sahayak_sub: 'पूछिए; नियम और उसका स्रोत पाइए', open_calc: 'कैलकुलेटर खोलिए',
+      greet: 'नमस्ते, शर्मा जी', date: 'मंगलवार, 14 अक्टूबर · एकादशी', tag: 'आपकी दूसरी पारी शुरू होती है।', done: '8:12 पर चेक-इन हुआ' }
+  };
+  var lang = 'en', ts = 1, checked = false, reduce = false;
+  function tr(k) { return (T[lang] && T[lang][k]) || T.en[k] || k; }
+  function applyText() {
+    $$('[data-t]').forEach(function (el) { el.textContent = tr(el.getAttribute('data-t')); });
+    $('#greet-line').textContent = tr('greet'); $('#date-line').textContent = tr('date'); $('#tagline').textContent = tr('tag');
+    if (checked) $('#ci-label').innerHTML = '<span class="ci-t">' + tr('done') + '</span><small>' + tr('told') + '</small>';
+    $('#lang-toggle').textContent = lang === 'en' ? 'हिन्दी' : 'English';
+    $('#lang-toggle').setAttribute('aria-pressed', String(lang === 'hi'));
+    $$('#lang-grid .lang-btn').forEach(function (b) { b.setAttribute('aria-pressed', String(b.dataset.code === lang)); });
+  }
+
+  /* ---------- fit phones to the column ---------- */
+  function fit() {
+    $$('.fit').forEach(function (f) {
+      var ph = f.firstElementChild;
+      var s = window.innerWidth <= 1020 ? Math.min(1, (window.innerWidth - 32) / 360) : 1;
+      f.style.width = (360 * s) + 'px'; f.style.height = (740 * s) + 'px';
+      ph.style.transform = 'scale(' + s + ')';
+    });
+  }
+  window.addEventListener('resize', fit);
+
+  /* ---------- screens ---------- */
+  var SCREENS = [
+    ['splash', 'Startup', 'Sunrise, then the name draws in'], ['lang', 'Language', 'Ten names, each in its own script'],
+    ['size', 'Text size', 'Three sizes, applied at once'], ['welcome', 'Welcome', 'Three lines and the independence notice'],
+    ['otp', 'Sign in', 'One-time code that fills itself'], ['home', 'Aaj (Today)', 'Check-in, pension, practice, circles'],
+    ['saathi', 'Saathi', 'Circles, a live room, calm feed'], ['seva', 'Seva', 'Mentoring, help and volunteering'],
+    ['me', 'Main', 'Everything else, one row each'], ['sahayak', 'Pension Sahayak', 'A cited answer'],
+    ['toolkit', 'Calculator', 'DA arrears, live'], ['yoga', 'Yog Kendra', 'Drawn instructor and breathing glow'],
+    ['sosScr', 'SOS', 'Five seconds and a big Cancel'], ['bolo', 'Bolo', 'Speak; it shows what it heard']
+  ];
+  var TABS = ['home', 'saathi', 'seva', 'me'], cur = 'splash', splashTimer;
+  function show(id, back) {
+    if (id === 'bolo') { openBolo(); return; }
+    clearTimeout(splashTimer);
+    $$('.scr').forEach(function (s) { s.classList.remove('on', 'rev'); });
+    var sp = $('#splash');
+    if (id === 'splash') { sp.classList.add('on'); replaySplash(); } else { sp.classList.remove('on', 'go'); var el = $('#' + id); if (back) el.classList.add('rev'); el.classList.add('on'); }
+    cur = id;
+    $('#glass').classList.toggle('on-splash', id === 'splash');
+    var isTab = TABS.indexOf(id) >= 0;
+    $('#tabbar').classList.toggle('on', isTab); $('#bolo').classList.toggle('on', isTab);
+    $$('.tab').forEach(function (t) { t.setAttribute('aria-selected', String(t.dataset.tab === id)); });
+    $$('#jump button').forEach(function (b) { b.setAttribute('aria-current', String(b.dataset.s === id)); });
+    if (id === 'otp') fillOtp(); if (id === 'sahayak') streamAnswer(); if (id === 'yoga') startYoga(); if (id === 'sosScr') startSos();
+    var body = $('#' + id + ' .body'); if (body) body.scrollTop = 0;
+  }
+  function replaySplash() {
+    var sp = $('#splash'); sp.classList.remove('go'); void sp.offsetWidth; sp.classList.add('go');
+    splashTimer = setTimeout(function () { if (cur === 'splash') show('lang'); }, reduce ? 900 : 5200);
+  }
+  $('#splash').addEventListener('click', function () { show('lang'); });
+  $('#replay').addEventListener('click', function () { show('splash'); });
+
+  document.addEventListener('click', function (e) {
+    var g = e.target.closest('[data-go]'); if (g) { show(g.dataset.go, g.hasAttribute('data-back')); return; }
+    var t = e.target.closest('[data-tab]'); if (t) { show(t.dataset.tab); }
+  });
+
+  /* jump list */
+  SCREENS.forEach(function (s) {
+    var b = document.createElement('button'); b.dataset.s = s[0]; b.innerHTML = '<b>' + s[1] + '</b><span>' + s[2] + '</span>';
+    b.addEventListener('click', function () { show(s[0]); $('#fit-main').scrollIntoView({ block: 'nearest', behavior: 'smooth' }); });
+    $('#jump').appendChild(b);
+  });
+
+  /* languages */
+  [['hi', 'हिन्दी'], ['en', 'English'], ['bn', 'বাংলা'], ['mr', 'मराठी'], ['ta', 'தமிழ்'], ['te', 'తెలుగు'], ['kn', 'ಕನ್ನಡ'], ['ml', 'മലയാളം'], ['gu', 'ગુજરાતી'], ['pa', 'ਪੰਜਾਬੀ']].forEach(function (l) {
+    var b = document.createElement('button'); b.className = 'lang-btn'; b.dataset.code = l[0]; b.setAttribute('aria-pressed', String(l[0] === 'en'));
+    b.innerHTML = '<span>' + l[1] + '</span><svg><use href="#i-speaker"/></svg>';
+    b.addEventListener('click', function () { if (l[0] === 'hi' || l[0] === 'en') { lang = l[0]; } else { lang = 'en'; } applyText(); $$('#lang-grid .lang-btn').forEach(function (x) { x.setAttribute('aria-pressed', String(x === b)); }); });
+    $('#lang-grid').appendChild(b);
+  });
+  $('#lang-toggle').addEventListener('click', function () { lang = lang === 'en' ? 'hi' : 'en'; applyText(); });
+
+  /* text size */
+  [[1, 'Aa', 'Standard'], [1.15, 'Aa', 'Larger'], [1.3, 'Aa', 'Largest']].forEach(function (s, i) {
+    var b = document.createElement('button'); b.className = 'sizebtn'; b.setAttribute('aria-pressed', String(i === 0));
+    b.innerHTML = '<span style="font-size:' + (22 * s[0]) + 'px;font-weight:700">' + s[1] + '</span><span class="t-call">' + s[2] + '</span>';
+    b.addEventListener('click', function () { ts = s[0]; root.style.setProperty('--ts', ts); $$('#sizes .sizebtn').forEach(function (x) { x.setAttribute('aria-pressed', String(x === b)); }); });
+    $('#sizes').appendChild(b);
+  });
+
+  /* otp */
+  var otpTimers = [];
+  function fillOtp() {
+    otpTimers.forEach(clearTimeout); otpTimers = [];
+    var boxes = $$('#otp-boxes i'); boxes.forEach(function (b) { b.textContent = ''; b.classList.remove('f'); });
+    '482910'.split('').forEach(function (d, i) { otpTimers.push(setTimeout(function () { boxes[i].textContent = d; boxes[i].classList.add('f'); }, 700 + i * 260)); });
+  }
+
+  /* theme, motion */
+  $('#theme-toggle').addEventListener('click', function () {
+    var dark = root.getAttribute('data-theme') === 'dark' || (!root.getAttribute('data-theme') && matchMedia('(prefers-color-scheme: dark)').matches);
+    root.setAttribute('data-theme', dark ? 'light' : 'dark'); this.textContent = dark ? 'Dark' : 'Light'; this.setAttribute('aria-pressed', String(!dark));
+  });
+  $('#motion-toggle').addEventListener('click', function () { reduce = !reduce; document.body.classList.toggle('reduce', reduce); this.setAttribute('aria-pressed', String(reduce)); });
+  if (matchMedia('(prefers-reduced-motion: reduce)').matches) { reduce = true; $('#motion-toggle').setAttribute('aria-pressed', 'true'); }
+
+  /* ---------- check-in + family phone ---------- */
+  function famNote(kind, title, body) {
+    $('#fam-wait').hidden = true;
+    var n = document.createElement('div'); n.className = 'notif' + (kind === 'red' ? ' red' : '');
+    n.innerHTML = '<div class="app"><svg><use href="#i-' + (kind === 'red' ? 'bell' : 'sun') + '"/></svg></div><div style="min-width:0"><b>' + title + '</b><p>' + body + '</p></div><small>now</small>';
+    $('#fam-feed').prepend(n);
+  }
+  $('#fam-reset').addEventListener('click', function () { $('#fam-feed').innerHTML = ''; $('#fam-wait').hidden = false; });
+  $('#checkin').addEventListener('click', function () {
+    var b = this; if (checked) return;
+    b.classList.add('sending');
+    setTimeout(function () {
+      b.classList.remove('sending'); b.classList.add('done'); checked = true;
+      $('#ci-label').innerHTML = '<span class="ci-t">' + tr('done') + '</span><small>' + tr('told') + '</small>';
+      famNote('ok', 'Sharma ji is fine', 'Checked in at 8:12. Thank you for being there.');
+    }, reduce ? 50 : 650);
+  });
+
+  /* ---------- namaste ---------- */
+  $('#nam1').addEventListener('click', function () {
+    var on = this.getAttribute('aria-pressed') !== 'true'; this.setAttribute('aria-pressed', String(on)); $('#nam1n').textContent = on ? 13 : 12;
+  });
+
+  /* ---------- sahayak answer ---------- */
+  var ansTimer;
+  function streamAnswer() {
+    clearInterval(ansTimer);
+    var full = 'Your DR arrears for the months since the new rate are about ₹1,800. The new rate applies from 1 July. ';
+    var tail = ' The arrears are the difference in rate, times your basic pension, times the months.';
+    var el = $('#ans-text'), more = $('#ans-more'); more.hidden = true; el.textContent = ''; el.classList.add('caret');
+    var i = 0, all = full + tail;
+    ansTimer = setInterval(function () {
+      i += reduce ? 200 : 3; el.innerHTML = all.slice(0, i).replace('1 July.', '1 July. <span class="cite">[DoPPW O.M., July]</span>').replace(/times the months\.$/, 'times the months. <span class="cite">[CCS Pension Rules 2021, Rule 44]</span>');
+      if (i >= all.length) { clearInterval(ansTimer); el.classList.remove('caret'); more.hidden = false; }
+    }, 28);
+  }
+
+  /* ---------- calculator ---------- */
+  function calc() {
+    var b = +$('#f-basic').value || 0, o = +$('#f-old').value || 0, n = +$('#f-new').value || 0, m = +$('#f-mo').value || 0;
+    var f = function (x) { return '₹' + Math.round(x).toLocaleString('en-IN'); };
+    $('#r-arrears').textContent = f(b * (n - o) / 100 * m); $('#r-new').textContent = f(b * (1 + n / 100));
+  }
+  ['f-basic', 'f-old', 'f-new', 'f-mo'].forEach(function (id) { $('#' + id).addEventListener('input', calc); }); calc();
+
+  /* ---------- yoga ---------- */
+  var STEPS = [
+    ['Seated side stretch', 'Hold · 12 seconds', '"Reach your right arm up and over. Only as far as feels comfortable."'],
+    ['Shoulder rolls', 'Ten slow circles', '"Roll your shoulders back and down. Let your neck stay soft."'],
+    ['Open the chest', 'Hold · 8 seconds, then rest', '"Open your arms wide as you breathe in. Bring them down as you breathe out."']
+  ];
+  var yi = 0, yPaused = false, yTimer, orbTimer;
+  function setStep(i) {
+    yi = (i + STEPS.length) % STEPS.length; var s = STEPS[yi], svg = $('#inst');
+    svg.setAttribute('class', 'inst p' + yi + (yPaused ? ' paused' : ''));
+    $('#y-step').textContent = s[0]; $('#y-hold').textContent = s[1]; $('#y-cap').textContent = s[2];
+    $('#y-count').textContent = (yi + 1) + ' of ' + STEPS.length; $('#y-prog').style.width = ((yi + 1) / STEPS.length * 100) + '%';
+  }
+  function startYoga() { clearInterval(yTimer); setStep(0); yPaused = false; $('#y-pt').textContent = 'Pause'; $('#y-pi').firstElementChild.setAttribute('href', '#i-pause');
+    yTimer = setInterval(function () { if (!yPaused && cur === 'yoga') setStep(yi + 1); }, 9000); }
+  $('#y-next').addEventListener('click', function () { setStep(yi + 1); });
+  $('#y-back').addEventListener('click', function () { setStep(yi - 1); });
+  $('#y-pause').addEventListener('click', function () {
+    yPaused = !yPaused; $('#inst').classList.toggle('paused', yPaused);
+    $('#y-pt').textContent = yPaused ? 'Resume' : 'Pause'; $('#y-pi').firstElementChild.setAttribute('href', yPaused ? '#i-play' : '#i-pause');
+  });
+  function who(dada) {
+    $('#who-dadi').setAttribute('aria-pressed', String(!dada)); $('#who-dada').setAttribute('aria-pressed', String(dada));
+    $('#y-chip').textContent = dada ? 'Dada' : 'Dadi'; $('#bun').style.display = dada ? 'none' : ''; $('#hair').setAttribute('fill', dada ? '#F1F1EE' : '#DADCDC');
+    $('#kurta').setAttribute('fill', dada ? 'var(--marigold)' : 'var(--accent)');
+  }
+  $('#who-dadi').addEventListener('click', function () { who(false); }); $('#who-dada').addEventListener('click', function () { who(true); });
+  function seg(y) {
+    $('#seg-y').setAttribute('aria-pressed', String(y)); $('#seg-b').setAttribute('aria-pressed', String(!y));
+    $('#pane-y').style.display = y ? 'flex' : 'none'; var pb = $('#pane-b'); pb.hidden = y; pb.style.display = y ? 'none' : 'flex';
+    $('#y-title').textContent = y ? 'Chair yoga' : 'Breathe';
+    clearInterval(orbTimer); if (!y) { var n = 0, txt = $('#orb-txt'); txt.textContent = 'Breathe in'; orbTimer = setInterval(function () { n++; var ph = n % 10; txt.textContent = ph < 4 ? 'Breathe in' : ph < 6 ? 'Hold' : 'Breathe out'; }, 1000); }
+  }
+  $('#seg-y').addEventListener('click', function () { seg(true); }); $('#seg-b').addEventListener('click', function () { seg(false); });
+
+  /* ---------- SOS (hold for two seconds) ---------- */
+  var holdTimer, sosTimer, sosN;
+  $$('[data-sos]').forEach(function (b) {
+    function start(e) { if (e.type === 'pointerdown' && e.button > 0) return; b.classList.add('hold'); clearTimeout(holdTimer); holdTimer = setTimeout(function () { b.classList.remove('hold'); show('sosScr'); }, 2000); }
+    function stop() { b.classList.remove('hold'); clearTimeout(holdTimer); }
+    b.addEventListener('pointerdown', start); b.addEventListener('pointerup', stop); b.addEventListener('pointerleave', stop); b.addEventListener('pointercancel', stop);
+    b.addEventListener('keydown', function (e) { if (e.key === 'Enter') show('sosScr'); });
+  });
+  function startSos() {
+    clearInterval(sosTimer); sosN = 5; $('#sos-n').textContent = 5; $('#sos-title').textContent = 'Sending SOS in…'; $('#sos-msg').textContent = 'Your family and helpers will get your location.';
+    $('#sos-report').hidden = true; $('#sos-cancel').hidden = false;
+    var ring = $('#ring'); ring.classList.remove('go'); void ring.offsetWidth; ring.classList.add('go');
+    sosTimer = setInterval(function () {
+      sosN--; $('#sos-n').textContent = Math.max(sosN, 0);
+      if (sosN <= 0) {
+        clearInterval(sosTimer); $('#sos-title').textContent = 'SOS sent'; $('#sos-msg').textContent = 'Help is being told. Stay where you are if you can.'; $('#sos-report').hidden = false; $('#sos-cancel').hidden = true;
+        famNote('red', 'Sharma ji needs help now', 'Location: 26.85, 80.95. Open Doosri Pari for details. This is not a replacement for 112.');
+      }
+    }, reduce ? 200 : 1000);
+  }
+  $('#sos-cancel').addEventListener('click', function () { clearInterval(sosTimer); show('home', true); });
+  $('#sos-safe').addEventListener('click', function () { famNote('ok', 'Sharma ji is safe now', 'The SOS is closed.'); show('home', true); });
+
+  /* ---------- Bolo ---------- */
+  var EG = [
+    { say: 'Beti ko call karo', title: 'Call Priya (daughter)?', body: 'Nothing is called until you confirm.', btn: 'Call Priya', why: 'call_family' },
+    { say: 'Mera DA arrears kitna banega?', title: 'Open the DA arrears calculator', body: 'Sahayak can also answer the question with the rule quoted.', btn: 'Open calculator', why: 'calculator', go: 'toolkit' },
+    { say: 'Shaam 8 baje BP ki dawai', title: 'New reminder: BP medicine at 8:00 pm, today', body: 'Check the time and tap Save.', btn: 'Save reminder', why: 'reminder' }
+  ];
+  var boloTimers = [];
+  function openBolo(i) {
+    boloTimers.forEach(clearTimeout); boloTimers = []; $('#sheet-bg').classList.add('on'); $('#sheet').classList.add('on');
+    var e = EG[i == null ? 0 : i], heard = $('#heard'), route = $('#route'), wave = $('#wave');
+    route.hidden = true; wave.classList.remove('stop'); heard.textContent = 'Listening…';
+    var n = 0; boloTimers.push(setTimeout(function typeIt() { n++; heard.textContent = e.say.slice(0, n); if (n < e.say.length) boloTimers.push(setTimeout(typeIt, reduce ? 5 : 45)); else boloTimers.push(setTimeout(function () {
+      wave.classList.add('stop'); route.hidden = false;
+      route.innerHTML = '<span class="pill" style="align-self:flex-start">' + e.why + '</span><div class="t-head">' + e.title + '</div><div class="t-call mut">' + e.body + '</div><div style="display:grid;grid-template-columns:1fr 1fr;gap:8px"><button class="btn" id="route-ok" style="min-height:56px;font-size:16px">' + e.btn + '</button><button class="btn sec" id="route-no" style="min-height:56px;font-size:16px">Cancel</button></div>';
+      $('#route-ok').onclick = function () { closeBolo(); if (e.go) show(e.go); }; $('#route-no').onclick = closeBolo;
+    }, 500)); }, reduce ? 100 : 1100));
+  }
+  function closeBolo() { boloTimers.forEach(clearTimeout); $('#sheet-bg').classList.remove('on'); $('#sheet').classList.remove('on'); }
+  $('#bolo').addEventListener('click', function () { openBolo(0); });
+  $('#sheet-close').addEventListener('click', closeBolo); $('#sheet-bg').addEventListener('click', closeBolo);
+  $$('#bolo-eg .chip').forEach(function (c) { c.addEventListener('click', function () { openBolo(+c.dataset.eg); }); });
+
+  applyText(); fit(); show('splash');
+  setTimeout(fit, 400);
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(fit);
+})();
+</script>

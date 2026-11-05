@@ -1,0 +1,29 @@
+/* Doosri Pari — हिन्दी.
+   Hindi is written out because it is the most common language among the
+   people this app is for. Untranslated keys fall back to the English value,
+   which is a working but poor experience — plan section 3.5 wants all ten. */
+
+"app_name" = "दूसरी पारी";
+
+"today_greeting" = "नमस्ते, %@";
+
+"check_in_button" = "मैं ठीक हूँ · मैं ठीक हूँ";
+"check_in_button_description" = "आज सबको बता दें कि आप ठीक हैं";
+"check_in_done" = "जाँच पूरी हुई";
+"check_in_done_at" = "%@ बजे जाँच पूरी हुई";
+
+"sos_button" = "एसओएस";
+"sos_button_description" = "आपातकालीन सहायता";
+
+"check_in_offline" = "इंटरनेट नहीं है। इंटरनेट आते ही आपकी जाँच भेज दी जाएगी।";
+"check_in_failed" = "भेजा नहीं जा सका। कृपया फिर कोशिश करें।";
+"retry" = "फिर कोशिश करें";
+
+"checkin_paused_note" = "जाँच रोकी हुई है। आपके न रहने तक किसी को सूचना नहीं जाएगी।";
+
+"history_title" = "पिछले १४ दिन";
+"history_empty" = "यहाँ अभी कुछ नहीं है। दिन बीतते ही आपकी जाँच यहाँ दिखेगी।";
+
+"history_day_checked_in" = "जाँच पूरी हुई";
+"history_day_alerted" = "सूचना भेजी गई";
+"history_day_none" = "जाँच नहीं हुई";

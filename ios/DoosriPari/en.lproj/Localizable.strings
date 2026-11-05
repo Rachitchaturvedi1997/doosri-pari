@@ -1,0 +1,32 @@
+/* Doosri Pari — English strings.
+   The key is the identifier; the value is what the user reads. A key must
+   never be reworded, because doing so orphans every translation of it.
+   Plan section 3.5: the app ships in ten languages. Only the two below are
+   written; the other eight follow as translators work through them. */
+
+"app_name" = "Doosri Pari";
+
+/* The %@ is the user's chosen form of address — "Sharma ji". */
+"today_greeting" = "Namaste, %@";
+
+"check_in_button" = "Main theek hoon · I'm fine";
+"check_in_button_description" = "Tell everyone you are fine today";
+"check_in_done" = "Checked in";
+"check_in_done_at" = "Checked in at %@";
+
+"sos_button" = "SOS";
+"sos_button_description" = "Emergency help";
+
+"check_in_offline" = "No connection. Your check-in will send when you are back online.";
+"check_in_failed" = "Could not send. Please try again.";
+"retry" = "Try again";
+
+"checkin_paused_note" = "Check-ins are paused. Nobody will be alerted while you are away.";
+
+"history_title" = "Last 14 days";
+"history_empty" = "Nothing here yet. Your check-ins will appear as days go by.";
+
+/* Spoken by VoiceOver for each day in the list. */
+"history_day_checked_in" = "Checked in";
+"history_day_alerted" = "Alerted";
+"history_day_none" = "No check-in";

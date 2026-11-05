@@ -1,0 +1,23 @@
+# LiveKit server config for Chai pe Charcha. Plan section 9.
+#
+# This is a STARTING POINT. For real rooms you need a public IP or a load
+# balancer, TLS in front (wss://), and a TURN server for phones behind carrier
+# NAT - which most Indian mobile networks are. Read LiveKit's deployment guide
+# before opening ports.
+#
+# The API key/secret pair below must match LIVEKIT_API_KEY / LIVEKIT_API_SECRET in
+# .env. Generate them; never reuse the placeholders.
+
+port: 7880
+rtc:
+  tcp_port: 7881
+  port_range_start: 50000
+  port_range_end: 60000
+  use_external_ip: true
+keys:
+  REPLACE_WITH_API_KEY: REPLACE_WITH_LONG_RANDOM_SECRET
+room:
+  max_participants: 210        # 200 listeners + 8 speakers + host, plan 6.7
+  empty_timeout: 300
+logging:
+  level: info

@@ -1,0 +1,4 @@
+{
+  "_comment": "The Sahayak evaluation set (plan 6.4, 300 questions). Ships EMPTY on purpose: the expected citations must come from someone who has read the rules, and an invented answer key behind the publish gate would be worse than none. An empty set produces a FAILED evaluation run, so nothing can be published against it. Format: each question has q, lang, service_type (or null), answerable (true/false), and expect {contains_any: [phrases the cited passage must contain], doc_no: optional}. See python/sahayak_eval.py.",
+  "questions": []
+}

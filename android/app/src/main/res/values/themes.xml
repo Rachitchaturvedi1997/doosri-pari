@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--
+      Compose paints the whole screen, so this theme only needs to set the
+      window background and status bar before the first frame — otherwise the
+      app flashes white on launch, which on a low-end handset with a light
+      sensor is jarring. Colours match DoosriPariColors in ui/theme/Color.kt.
+    -->
+    <style name="Theme.DoosriPari" parent="android:Theme.Material.Light.NoActionBar">
+        <item name="android:windowBackground">@color/background</item>
+        <item name="android:statusBarColor">@color/background</item>
+        <item name="android:windowLightStatusBar">true</item>
+        <item name="android:navigationBarColor">@color/background</item>
+    </style>
+</resources>

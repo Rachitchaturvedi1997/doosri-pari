@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Mirrors DoosriPariColors in ui/theme/Color.kt. Keep the two in step. -->
+<resources>
+    <color name="background">#FAFAF7</color>
+    <color name="accent">#0B6E66</color>
+</resources>

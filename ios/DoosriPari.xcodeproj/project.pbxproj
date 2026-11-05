@@ -1,0 +1,572 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 56;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		BB0000000000000000000001 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AA0000000000000000000001 /* Assets.xcassets */; };
+		BB0000000000000000000002 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = AA0000000000000000000002 /* Info.plist */; };
+		BB0000000000000000000003 /* en in Resources */ = {isa = PBXBuildFile; fileRef = AA0000000000000000000386 /* en */; };
+		BB0000000000000000000004 /* hi in Resources */ = {isa = PBXBuildFile; fileRef = AA0000000000000000000387 /* hi */; };
+		BB0000000000000000000005 /* DoosriPariApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000000000000000000004 /* DoosriPariApp.swift */; };
+		BB0000000000000000000006 /* CheckInModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000000000000000000005 /* CheckInModels.swift */; };
+		BB0000000000000000000007 /* CheckInService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000000000000000000006 /* CheckInService.swift */; };
+		BB0000000000000000000008 /* CheckInView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000000000000000000007 /* CheckInView.swift */; };
+		BB0000000000000000000009 /* CheckInViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000000000000000000008 /* CheckInViewModel.swift */; };
+		BB000000000000000000000A /* DoosriMetrics.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000000000000000000009 /* DoosriMetrics.swift */; };
+		BB000000000000000000000B /* DoosriPalette.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA000000000000000000000A /* DoosriPalette.swift */; };
+		BB000000000000000000000C /* escalation-contract.json in Resources */ = {isa = PBXBuildFile; fileRef = AA0000000000000000000003 /* escalation-contract.json */; };
+		BB000000000000000000000D /* ContractLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA000000000000000000000B /* ContractLoader.swift */; };
+		BB000000000000000000000E /* EscalationContractTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA000000000000000000000C /* EscalationContractTests.swift */; };
+		BB000000000000000000000F /* CheckInModelsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA000000000000000000000D /* CheckInModelsTests.swift */; };
+		BB0000000000000000000010 /* CheckInServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA000000000000000000000E /* CheckInServiceTests.swift */; };
+		BB0000000000000000000011 /* CheckInViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA000000000000000000000F /* CheckInViewModelTests.swift */; };
+		BB0000000000000000000012 /* FakeCheckInService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000000000000000000010 /* FakeCheckInService.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		1E0000000000000000000001 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 1C0000000000000000000001 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = DD0000000000000000000001;
+			remoteInfo = DoosriPari;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		AA0000000000000000000001 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "DoosriPari/Resources/Assets.xcassets"; sourceTree = "<group>"; };
+		AA0000000000000000000002 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "DoosriPari/Info.plist"; sourceTree = "<group>"; };
+		AA0000000000000000000003 /* escalation-contract.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = "../shared/contract/escalation-contract.json"; sourceTree = "<group>"; };
+		AA0000000000000000000004 /* DoosriPariApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DoosriPari/DoosriPariApp.swift"; sourceTree = "<group>"; };
+		AA0000000000000000000005 /* CheckInModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DoosriPari/CheckIn/CheckInModels.swift"; sourceTree = "<group>"; };
+		AA0000000000000000000006 /* CheckInService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DoosriPari/CheckIn/CheckInService.swift"; sourceTree = "<group>"; };
+		AA0000000000000000000007 /* CheckInView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DoosriPari/CheckIn/CheckInView.swift"; sourceTree = "<group>"; };
+		AA0000000000000000000008 /* CheckInViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DoosriPari/CheckIn/CheckInViewModel.swift"; sourceTree = "<group>"; };
+		AA0000000000000000000009 /* DoosriMetrics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DoosriPari/Design/DoosriMetrics.swift"; sourceTree = "<group>"; };
+		AA000000000000000000000A /* DoosriPalette.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DoosriPari/Design/DoosriPalette.swift"; sourceTree = "<group>"; };
+		AA000000000000000000000B /* ContractLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DoosriPariTests/ContractLoader.swift"; sourceTree = "<group>"; };
+		AA000000000000000000000C /* EscalationContractTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DoosriPariTests/EscalationContractTests.swift"; sourceTree = "<group>"; };
+		AA000000000000000000000D /* CheckInModelsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DoosriPariTests/CheckInModelsTests.swift"; sourceTree = "<group>"; };
+		AA000000000000000000000E /* CheckInServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DoosriPariTests/CheckInServiceTests.swift"; sourceTree = "<group>"; };
+		AA000000000000000000000F /* CheckInViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DoosriPariTests/CheckInViewModelTests.swift"; sourceTree = "<group>"; };
+		AA0000000000000000000010 /* FakeCheckInService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DoosriPariTests/FakeCheckInService.swift"; sourceTree = "<group>"; };
+		AA0000000000000000000386 /* Localizable.strings */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		AA0000000000000000000387 /* Localizable.strings */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = hi; path = hi.lproj/Localizable.strings; sourceTree = "<group>"; };
+		AA0000000000000000000384 /* DoosriPari.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DoosriPari.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		AA0000000000000000000385 /* DoosriPariTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DoosriPariTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		F00000000000000000000001 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F00000000000000000000002 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		CC0000000000000000000001 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				AA0000000000000000000384 /* DoosriPari.app */,
+				AA0000000000000000000385 /* DoosriPariTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		CC0000000000000000000002 /* CheckIn */ = {
+			isa = PBXGroup;
+			children = (
+				AA0000000000000000000005,
+				AA0000000000000000000006,
+				AA0000000000000000000007,
+				AA0000000000000000000008,
+			);
+			path = "DoosriPari/CheckIn";
+			sourceTree = "<group>";
+		};
+		CC0000000000000000000003 /* Design */ = {
+			isa = PBXGroup;
+			children = (
+				AA0000000000000000000009,
+				AA000000000000000000000A,
+			);
+			path = "DoosriPari/Design";
+			sourceTree = "<group>";
+		};
+		CC0000000000000000000004 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				AA0000000000000000000001,
+				AF0000000000000000000001 /* Localizable.strings */,
+				AA0000000000000000000002,
+			);
+			path = "DoosriPari/Resources";
+			sourceTree = "<group>";
+		};
+		CC0000000000000000000005 /* DoosriPari */ = {
+			isa = PBXGroup;
+			children = (
+				AA0000000000000000000004,
+				CC0000000000000000000002 /* CheckIn */,
+				CC0000000000000000000003 /* Design */,
+				CC0000000000000000000004 /* Resources */,
+			);
+			path = "DoosriPari";
+			sourceTree = "<group>";
+		};
+		CC0000000000000000000006 /* DoosriPariTests */ = {
+			isa = PBXGroup;
+			children = (
+				AA000000000000000000000B,
+				AA000000000000000000000C,
+				AA000000000000000000000D,
+				AA000000000000000000000E,
+				AA000000000000000000000F,
+				AA0000000000000000000010,
+			);
+			path = "DoosriPariTests";
+			sourceTree = "<group>";
+		};
+		CC0000000000000000000007 /* contract */ = {
+			isa = PBXGroup;
+			children = (
+				AA0000000000000000000003,
+			);
+			path = "../shared/contract";
+			sourceTree = "<group>";
+		};
+		CC0000000000000000000008 /* DoosriPari */ = {
+			isa = PBXGroup;
+			children = (
+				CC0000000000000000000005 /* DoosriPari */,
+				CC0000000000000000000006 /* DoosriPariTests */,
+				CC0000000000000000000007 /* contract */,
+				CC0000000000000000000001 /* Products */,
+			);
+			name = DoosriPari;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXVariantGroup section */
+		AF0000000000000000000001 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				AA0000000000000000000386 /* en */,
+				AA0000000000000000000387 /* hi */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin PBXNativeTarget section */
+		DD0000000000000000000001 /* DoosriPari */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 1B0000000000000000000001 /* Build configuration list for PBXNativeTarget "DoosriPari" */;
+			buildPhases = (
+				EE0000000000000000000001,
+				F00000000000000000000001,
+				EF0000000000000000000001,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = DoosriPari;
+			productName = DoosriPari;
+			productReference = AA0000000000000000000384 /* DoosriPari.app */;
+			productType = "com.apple.product-type.application";
+		};
+		DD0000000000000000000002 /* DoosriPariTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 1B0000000000000000000002 /* Build configuration list for PBXNativeTarget "DoosriPariTests" */;
+			buildPhases = (
+				EE0000000000000000000002,
+				F00000000000000000000002,
+				EF0000000000000000000002,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				1D0000000000000000000001 /* PBXTargetDependency */,
+			);
+			name = DoosriPariTests;
+			productName = DoosriPariTests;
+			productReference = AA0000000000000000000385 /* DoosriPariTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		1C0000000000000000000001 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1600;
+				LastUpgradeCheck = 1600;
+				TargetAttributes = {
+					DD0000000000000000000001 = {CreatedOnToolsVersion = 16.0;};
+					DD0000000000000000000002 = {CreatedOnToolsVersion = 16.0; TestTargetID = DD0000000000000000000001;};
+				};
+			};
+			buildConfigurationList = 1B0000000000000000000000 /* Build configuration list for PBXProject "DoosriPari" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				hi,
+				Base,
+			);
+			mainGroup = CC0000000000000000000008;
+			productRefGroup = CC0000000000000000000001 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				DD0000000000000000000001 /* DoosriPari */,
+				DD0000000000000000000002 /* DoosriPariTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		EF0000000000000000000001 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BB0000000000000000000001 /* Assets.xcassets in Resources */,
+				BB0000000000000000000002 /* Info.plist in Resources */,
+				BB0000000000000000000003 /* en in Resources */,
+				BB0000000000000000000004 /* hi in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		EF0000000000000000000002 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BB000000000000000000000C /* escalation-contract.json in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		EE0000000000000000000001 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BB0000000000000000000005 /* DoosriPariApp.swift in Sources */,
+				BB0000000000000000000006 /* CheckInModels.swift in Sources */,
+				BB0000000000000000000007 /* CheckInService.swift in Sources */,
+				BB0000000000000000000008 /* CheckInView.swift in Sources */,
+				BB0000000000000000000009 /* CheckInViewModel.swift in Sources */,
+				BB000000000000000000000A /* DoosriMetrics.swift in Sources */,
+				BB000000000000000000000B /* DoosriPalette.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		EE0000000000000000000002 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BB000000000000000000000D /* ContractLoader.swift in Sources */,
+				BB000000000000000000000E /* EscalationContractTests.swift in Sources */,
+				BB000000000000000000000F /* CheckInModelsTests.swift in Sources */,
+				BB0000000000000000000010 /* CheckInServiceTests.swift in Sources */,
+				BB0000000000000000000011 /* CheckInViewModelTests.swift in Sources */,
+				BB0000000000000000000012 /* FakeCheckInService.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		1D0000000000000000000001 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = DD0000000000000000000001 /* DoosriPari */;
+			targetProxy = 1E0000000000000000000001 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		1A0000000000000000000001 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		1A0000000000000000000002 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_VERSION = 5.0;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		1A0000000000000000000003 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_STYLE = Automatic;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_PREVIEWS = YES;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = DoosriPari/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MARKETING_VERSION = 1.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = in.doosripari.app;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		1A0000000000000000000004 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_STYLE = Automatic;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_PREVIEWS = YES;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = DoosriPari/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MARKETING_VERSION = 1.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = in.doosripari.app;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		1A0000000000000000000005 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_STYLE = Automatic;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = in.doosripari.app.tests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/DoosriPari.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/DoosriPari";
+			};
+			name = Debug;
+		};
+		1A0000000000000000000006 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_STYLE = Automatic;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = in.doosripari.app.tests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/DoosriPari.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/DoosriPari";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		1B0000000000000000000000 /* Build configuration list for PBXProject "DoosriPari" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1A0000000000000000000001 /* Debug */,
+				1A0000000000000000000002 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		1B0000000000000000000001 /* Build configuration list for PBXNativeTarget "DoosriPari" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1A0000000000000000000003 /* Debug */,
+				1A0000000000000000000004 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		1B0000000000000000000002 /* Build configuration list for PBXNativeTarget "DoosriPariTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1A0000000000000000000005 /* Debug */,
+				1A0000000000000000000006 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 1C0000000000000000000001 /* Project object */;
+}

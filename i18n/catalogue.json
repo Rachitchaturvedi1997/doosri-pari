@@ -1,0 +1,238 @@
+{
+  "_comment": [
+    "Doosri Pari — the single source of truth for every user-visible string.",
+    "",
+    "Plan section 6.16 names ten launch languages, and says they are HUMAN",
+    "TRANSLATED by a native speaker over 60. That is not a stylistic preference",
+    "and it is not something a machine can be trusted with here: this app's",
+    "readers are pensioners, the strings carry safety meaning, and a sentence",
+    "that is merely awkward in English becomes a sentence nobody understands in",
+    "Malayalam. So the rule for this file is simple and absolute:",
+    "",
+    "  * A value may be real translated text.",
+    "  * A value may be the marker \"@UNTRANSLATED\", which the generator replaces",
+    "    with the English string and stamps with a visible fallback comment.",
+    "  * A value may never be machine-generated text presented as a translation.",
+    "",
+    "An honest gap is a line in a translator's brief. An invented Tamil sentence",
+    "is a pensioner acting on it. The generator and the test are built to make",
+    "the gap impossible to miss and equally impossible to fake.",
+    "",
+    "Regenerate the platform files after editing:",
+    "  python -m python.tools.gen_strings",
+    "Then run python/tests/test_strings.py, which checks every key exists in",
+    "every language and reports how many are still untranslated."
+  ],
+  "languages": [
+    { "code": "en", "name": "English", "android": "values", "ios": "en.lproj", "direction": "ltr" },
+    { "code": "hi", "name": "हिन्दी", "android": "values-hi", "ios": "hi.lproj", "direction": "ltr" },
+    { "code": "bn", "name": "বাংলা", "android": "values-bn", "ios": "bn.lproj", "direction": "ltr" },
+    { "code": "mr", "name": "मराठी", "android": "values-mr", "ios": "mr.lproj", "direction": "ltr" },
+    { "code": "ta", "name": "தமிழ்", "android": "values-ta", "ios": "ta.lproj", "direction": "ltr" },
+    { "code": "te", "name": "తెలుగు", "android": "values-te", "ios": "te.lproj", "direction": "ltr" },
+    { "code": "kn", "name": "ಕನ್ನಡ", "android": "values-kn", "ios": "kn.lproj", "direction": "ltr" },
+    { "code": "ml", "name": "മലയാളം", "android": "values-ml", "ios": "ml.lproj", "direction": "ltr" },
+    { "code": "gu", "name": "ગુજરાતી", "android": "values-gu", "ios": "gu.lproj", "direction": "ltr" },
+    { "code": "pa", "name": "ਪੰਜਾਬੀ", "android": "values-pa", "ios": "pa.lproj", "direction": "ltr" }
+  ],
+
+  "strings": {
+    "app.name": {
+      "en": "Doosri Pari",
+      "hi": "दूसरी पारी"
+    },
+
+    "checkin.im_fine": {
+      "_note": "Plan 4.4: the check-in button label. The plan writes it bilingual — Hindi and English on one button — because a pensioner may be read to by a grandchild who reads English, and because the button's meaning must survive a language setting that has not been chosen yet. Keep both halves in every language's value by rendering the locale string and the English one together, not by translating the pair as one blob.",
+      "en": "Main theek hoon · I'm fine",
+      "hi": "मैं ठीक हूँ · I'm fine"
+    },
+    "checkin.checked_in_at": {
+      "en": "Checked in at %s",
+      "hi": "%s बजे ठीक हूँ"
+    },
+    "checkin.button_description": {
+      "_note": "TalkBack / VoiceOver. Announces the ACTION and today's STATE, not the glyph. Plan 6.16.",
+      "en": "Say you are fine. You have not checked in today.",
+      "hi": "बताइए कि आप ठीक हैं। आज आपने अभी तक नहीं बताया है।"
+    },
+
+    "sos.button": {
+      "_note": "Plan 4.4: labelled 'SOS', never an icon alone. This is the one control that must be understood by a 75-year-old at 3am in the dark. Do not translate the letters; translate nothing about this label.",
+      "en": "SOS",
+      "hi": "SOS"
+    },
+    "sos.button_description": {
+      "_note": "Announces the action it performs, not its glyph. Plan 6.16.",
+      "en": "Call for help. Hold for two seconds.",
+      "hi": "मदद बुलाइए। दो सेकंड दबाकर रखिए।"
+    },
+    "sos.hold_to_send": {
+      "en": "Hold to send SOS",
+      "hi": "SOS भेजने के लिए दबाकर रखिए"
+    },
+    "sos.countdown_title": {
+      "en": "Sending SOS in",
+      "hi": "SOS भेजा जा रहा है"
+    },
+    "sos.cancel": {
+      "_note": "Plan 4.4: alerts use VERBS, never bare OK/Cancel. 'Cancel' here is a verb phrase that says what it cancels — a bare 'Cancel' on the SOS countdown is a button a panicking person cannot decide about.",
+      "en": "Cancel — do not send",
+      "hi": "रद्द करें — मत भेजिए"
+    },
+    "sos.call_112": {
+      "en": "Call 112",
+      "hi": "112 पर कॉल करें"
+    },
+    "sos.sent": {
+      "en": "Sent to your family",
+      "hi": "आपके परिवार को भेज दिया गया"
+    },
+    "sos.sending": {
+      "_note": "The honest failure state. A pensioner who sees 'sent' while nothing went out is worse off than one who sees this. Plan 6.3.",
+      "en": "Trying to send — we will keep trying",
+      "hi": "भेजने की कोशिश जारी है — हम कोशिश करते रहेंगे"
+    },
+    "sos.im_safe": {
+      "en": "I'm safe now",
+      "hi": "अब मैं सुरक्षित हूँ"
+    },
+
+    "bolo.label": {
+      "_note": "Plan 5: the floating mic is called 'Bolo'. Plan 4.4: every icon has a text label beside it — no icon-only controls.",
+      "en": "Bolo",
+      "hi": "बोलो"
+    },
+    "bolo.listening": {
+      "en": "Listening…",
+      "hi": "सुन रहा हूँ…"
+    },
+    "bolo.confirm_before_sending": {
+      "_note": "Plan 5, stated as a rule: the voice layer never posts, calls, pays or sends an SOS without a visible confirmation. This string is the confirmation's question.",
+      "en": "Shall I do this?",
+      "hi": "क्या मैं यह करूँ?"
+    },
+
+    "tab.aaj": {
+      "en": "Aaj",
+      "hi": "आज"
+    },
+    "tab.saathi": {
+      "en": "Saathi",
+      "hi": "साथी"
+    },
+    "tab.seva": {
+      "en": "Seva",
+      "hi": "सेवा"
+    },
+    "tab.main": {
+      "en": "Main",
+      "hi": "मैं"
+    },
+
+    "sahayak.disclaimer": {
+      "_note": "Plan 6.4: EVERY answer ends with this line. It is one constant used in one place — a disclaimer repeated at each call site is one that gets forgotten at the ninth. Translate it as a whole sentence; do not shorten it to a word like 'Note'.",
+      "en": "This is general information, not advice.",
+      "hi": "यह सामान्य जानकारी है, सलाह नहीं।"
+    },
+    "sahayak.citation_source": {
+      "en": "Source",
+      "hi": "स्रोत"
+    },
+    "sahayak.citation_verified": {
+      "_note": "Plan 6.4: the citation carries the date the source was last verified. A rate or a rule without its date is a thing nobody can rely on.",
+      "en": "Last verified %s",
+      "hi": "आख़िरी बार जाँचा गया %s"
+    },
+    "sahayak.no_official_answer": {
+      "_note": "The 'citations or nothing' rule's empty state. Never a fluent uncited paragraph — a pensioner will act on it.",
+      "en": "I don't have an official answer to this. Ask the %s department, on form %s.",
+      "hi": "इसका कोई आधिकारिक जवाब मेरे पास नहीं है। %s विभाग से, %s फ़ॉर्म पर पूछिए।"
+    },
+    "sahayak.no_personal_details": {
+      "_note": "Plan 14: pension amounts, Aadhaar, PPO and bank details never reach the server. This is what the app says when a question contains one. It must not echo the number back.",
+      "en": "Please don't type your pension, Aadhaar, PPO or bank number here. I don't need it, and it never leaves your phone.",
+      "hi": "कृपया यहाँ अपना पेंशन, आधार, PPO या बैंक नंबर न लिखें। मुझे इसकी ज़रूरत नहीं है, और यह आपके फ़ोन से बाहर नहीं जाता।"
+    },
+
+    "practice.disclaimer": {
+      "_note": "Plan 7.2: spiritual practice is NOT medical advice and must not read like clinical guidance. Plain, non-dismissive, and one constant used in one place.",
+      "en": "This is general information, not medical or spiritual advice. What is right for your practice is between you and the people who know you.",
+      "hi": "यह सामान्य जानकारी है, चिकित्सा या आध्यात्मिक सलाह नहीं। आपके अभ्यास के लिए क्या ठीक है, यह आपके और आपके अपनों के बीच की बात है।"
+    },
+    "kendra.withheld_pose": {
+      "_note": "Plan 7.1. A silent omission reads as 'there is nothing here', and a pensioner with a bad knee handed a squat is the exact failure the design exists to prevent. The screen MUST show what was withheld and why.",
+      "en": "Not offered for you: %s (%s)",
+      "hi": "आपके लिए नहीं: %s (%s)"
+    },
+    "kendra.festival_source": {
+      "_note": "Plan 7.2: festival and vrat dates come from a licensed source and are NEVER computed. An auspicious date that is wrong is real harm to somebody who planned a trip around it. The source and its date are always shown.",
+      "en": "Dates from %s, last checked %s",
+      "hi": "तारीख़ें %s से, आख़िरी जाँच %s"
+    },
+
+    "health.dose_missed": {
+      "_note": "Plan 6.10. A dose nobody acknowledged renders as MISSED, never 'skipped'. The premise is that a person who stopped taking their tablets did not decide to skip them.",
+      "en": "Not recorded",
+      "hi": "दर्ज नहीं है"
+    },
+    "health.shared_with_guardian": {
+      "_note": "Plan 6.10: the difference between family support and family surveillance is exactly this toggle.",
+      "en": "Your family can see this medicine",
+      "hi": "आपका परिवार यह दवा देख सकता है"
+    },
+    "health.not_a_diagnosis": {
+      "_note": "Plan 14 and 6.10: the app records and shows. It never diagnoses, never interprets a reading, never suggests a dose change.",
+      "en": "This is a record, not a diagnosis. Show it to your doctor.",
+      "hi": "यह रिकॉर्ड है, निदान नहीं। इसे अपने डॉक्टर को दिखाइए।"
+    },
+
+    "consent.location.title": {
+      "en": "Share location",
+      "hi": "स्थान साझा करें"
+    },
+    "consent.health.title": {
+      "en": "Keep health records",
+      "hi": "स्वास्थ्य रिकॉर्ड रखें"
+    },
+    "consent.guardian.title": {
+      "en": "Let my family see these medicines",
+      "hi": "मेरे परिवार को ये दवाइयाँ दिखाएँ"
+    },
+    "consent.withdrawal_means": {
+      "_note": "Plan 14: three separate consents, each independently withdrawable, and withdrawal must actually stop the thing — not just flip a flag. The screen says what stopping means.",
+      "en": "If you turn this off, we stop doing it now. What we already sent to your family stays with them.",
+      "hi": "इसे बंद करने पर हम अभी रुक जाते हैं। जो पहले आपके परिवार को भेजा जा चुका है, वह उनके पास रहेगा।"
+    },
+
+    "documents.stay_on_phone": {
+      "_note": "Plan 14: pension slips and documents are encrypted on the phone and the server never holds them. Say so where the documents are kept.",
+      "en": "Your documents are locked on this phone. We never keep a copy.",
+      "hi": "आपके दस्तावेज़ इसी फ़ोन में बंद हैं। हम कभी नकल नहीं रखते।"
+    },
+
+    "alert.keep": {
+      "_note": "Plan 4.4: alerts are only for irreversible actions, and their buttons use VERBS, never bare OK/Cancel. 'Keep' is the verb for the thing being destroyed.",
+      "en": "Keep it",
+      "hi": "रखें"
+    },
+    "alert.delete": {
+      "en": "Delete it",
+      "hi": "मिटाएँ"
+    },
+
+    "empty.nothing_here": {
+      "_note": "Plan 6.2: a pensioner must be able to tell 'nothing today' from 'we could not reach the server'. These two strings are the difference and must never be merged.",
+      "en": "Nothing here yet.",
+      "hi": "यहाँ अभी कुछ नहीं है।"
+    },
+    "empty.cannot_reach": {
+      "en": "We can't reach the server. Showing what we had last.",
+      "hi": "सर्वर से बात नहीं हो पा रही। पिछली जानकारी दिखा रहे हैं।"
+    },
+    "empty.last_updated": {
+      "en": "Last updated %s",
+      "hi": "आख़िरी बार अपडेट %s"
+    }
+  }
+}

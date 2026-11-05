@@ -1,0 +1,87 @@
+# Doosri Pari — the whole backend on one machine.
+#
+#   cp .env.example .env         # fill in the secrets, at minimum SECRET_KEY
+#   docker compose up -d --build
+#
+# Services:
+#   db       Postgres 16 with pgvector
+#   redis    rate limits + realtime fan-out
+#   migrate  runs `alembic upgrade head` once, then exits
+#   api      the FastAPI app (gunicorn + uvicorn workers)
+#   worker   the scheduler - CHECK-IN ESCALATION RUNS HERE. Do not run without it.
+#   livekit  the voice-room SFU (profile "voice"; bring your own TLS + TURN in prod)
+#
+# For a single-box deployment put deploy/nginx.conf in front of `api`.
+
+x-app: &app
+  build: .
+  env_file: .env
+  environment:
+    DATABASE_URL: postgresql+psycopg2://doosri:${POSTGRES_PASSWORD:?set POSTGRES_PASSWORD in .env}@db:5432/doosri
+    REDIS_URL: redis://redis:6379/0
+    ENV: production
+  depends_on:
+    db:
+      condition: service_healthy
+    redis:
+      condition: service_started
+  restart: unless-stopped
+  volumes:
+    - storage:/app/storage
+
+services:
+  db:
+    image: pgvector/pgvector:pg16
+    environment:
+      POSTGRES_USER: doosri
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?set POSTGRES_PASSWORD in .env}
+      POSTGRES_DB: doosri
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U doosri -d doosri"]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+    restart: unless-stopped
+
+  redis:
+    image: redis:7-alpine
+    command: ["redis-server", "--appendonly", "yes"]
+    volumes:
+      - redisdata:/data
+    restart: unless-stopped
+
+  migrate:
+    <<: *app
+    command: ["alembic", "upgrade", "head"]
+    restart: "no"
+
+  api:
+    <<: *app
+    depends_on:
+      migrate:
+        condition: service_completed_successfully
+    ports:
+      - "8000:8000"
+
+  worker:
+    <<: *app
+    command: ["python", "-m", "python.jobs"]
+    depends_on:
+      migrate:
+        condition: service_completed_successfully
+
+  livekit:
+    profiles: ["voice"]
+    image: livekit/livekit-server:latest
+    command: ["--config", "/etc/livekit.yaml"]
+    network_mode: host
+    volumes:
+      - ./deploy/livekit.yaml:/etc/livekit.yaml:ro
+    restart: unless-stopped
+
+volumes:
+  pgdata:
+  redisdata:
+  storage:

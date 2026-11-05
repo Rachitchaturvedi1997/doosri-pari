@@ -1,0 +1,42 @@
+# Gradle
+.gradle/
+build/
+local.properties
+
+# The JDK path Moholla hard-codes. Deliberately not set here either — see
+# gradle.properties. Machine-specific, and it breaks everyone else's build.
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+python/.venv/
+*.egg-info/
+
+# Local environment. config.py reads this; it holds a real secret key and a
+# real database URL in any deployment that is not a laptop.
+.env
+
+# SQLite. The default development database is a file, and it is not source.
+*.db
+*.db-journal
+*.sqlite3
+
+# Android
+*.apk
+*.aab
+captures/
+
+# Xcode — relevant only when this is opened on a Mac, but the rules belong
+# with the project rather than in someone's global gitignore.
+ios/build/
+ios/Pods/
+DerivedData/
+ios/*.xcworkspace/xcuserdata/
+ios/*.xcodeproj/xcuserdata/
+*.xcuserstate
+
+# Editors
+.idea/
+*.iml
+.DS_Store

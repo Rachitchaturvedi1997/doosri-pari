@@ -1,0 +1,158 @@
+# Doosri Pari — version catalog.
+#
+# One Kotlin version across the whole build. doosri-pari/ is a standalone Gradle
+# build (its own settings.gradle.kts and wrapper) that lives inside the Moholla
+# checkout, not a module of Moholla's build — so there is no need to match
+# Moholla's Kotlin 2.0.21. Two versions in one build load the Kotlin Gradle
+# plugin twice and the build fails to configure.
+[versions]
+agp = "8.7.2"
+androidCompileSdk = "35"
+androidMinSdk = "28"          # plan section 13: Android 9+
+androidTargetSdk = "35"
+
+kotlin = "2.1.21"
+ksp = "2.1.21-2.0.1"
+coroutines = "1.9.0"
+serialization = "1.7.3"
+datetime = "0.6.1"
+ktor = "3.0.3"
+room = "2.6.1"
+datastore = "1.1.1"
+coil = "3.0.4"
+koin = "4.0.0"
+kermit = "2.0.4"
+
+coreKtx = "1.15.0"
+lifecycle = "2.8.7"
+activityCompose = "1.9.3"
+composeBom = "2024.12.01"
+navigation = "2.8.5"
+okhttp = "4.12.0"
+junit = "4.13.2"
+robolectric = "4.14.1"
+roborazzi = "1.32.2"
+googleServices = "4.4.2"
+firebaseBom = "33.7.0"
+media3 = "1.5.1"
+webrtc = "125.6422.06"
+osmdroid = "6.1.20"
+work = "2.10.0"
+tink = "1.15.0"
+credentials = "1.3.0"
+googleid = "1.1.1"
+profileinstaller = "1.4.1"
+camerax = "1.4.1"
+haze = "1.1.1"
+androidxMedia = "1.7.0"
+livekit = "2.5.1"
+sqliteBundled = "2.4.0"
+sqldelightVersion = "2.0.2"
+composeMultiplatformVersion = "1.7.3"
+securityCrypto = "1.1.0-alpha06"
+androidxHealth = "1.0.0"
+playBilling = "7.1.1"
+webauthn = "2.0.0"
+
+[libraries]
+# --- shared KMP -------------------------------------------------------------
+kotlinx-coroutines-core = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-core", version.ref = "coroutines" }
+kotlinx-coroutines-test = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-test", version.ref = "coroutines" }
+kotlinx-coroutines-android = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-android", version.ref = "coroutines" }
+kotlinx-coroutines-play = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-play-services", version.ref = "coroutines" }
+kotlinx-serialization-json = { group = "org.jetbrains.kotlinx", name = "kotlinx-serialization-json", version.ref = "serialization" }
+kotlinx-datetime = { group = "org.jetbrains.kotlinx", name = "kotlinx-datetime", version.ref = "datetime" }
+
+ktor-client-core = { group = "io.ktor", name = "ktor-client-core", version.ref = "ktor" }
+ktor-client-okhttp = { group = "io.ktor", name = "ktor-client-okhttp", version.ref = "ktor" }
+ktor-client-darwin = { group = "io.ktor", name = "ktor-client-darwin", version.ref = "ktor" }
+ktor-client-mock = { group = "io.ktor", name = "ktor-client-mock", version.ref = "ktor" }
+ktor-client-content-negotiation = { group = "io.ktor", name = "ktor-client-content-negotiation", version.ref = "ktor" }
+ktor-serialization-json = { group = "io.ktor", name = "ktor-serialization-kotlinx-json", version.ref = "ktor" }
+ktor-client-logging = { group = "io.ktor", name = "ktor-client-logging", version.ref = "ktor" }
+
+koin-core = { group = "io.insert-koin", name = "koin-core", version.ref = "koin" }
+kermit = { group = "co.touchlab", name = "kermit", version.ref = "kermit" }
+
+# --- shared KMP database ----------------------------------------------------
+# SQLDelight, not Room. Plan section 8.2 offers either; Room's KMP support is
+# still alpha and this code is not compiled again until there is a Mac and an
+# emulator, so the stable option wins. It also generates plain Kotlin interfaces
+# rather than a runtime-annotation processor, which keeps the iOS framework's
+# surface small.
+sqldelight = { group = "app.cash.sqldelight", name = "sqldelight", version.ref = "sqldelightVersion" }
+sqldelight-runtime = { group = "app.cash.sqldelight", name = "runtime", version.ref = "sqldelightVersion" }
+sqldelight-coroutines = { group = "app.cash.sqldelight", name = "coroutines-extensions", version.ref = "sqldelightVersion" }
+sqldelight-android = { group = "app.cash.sqldelight", name = "android-driver", version.ref = "sqldelightVersion" }
+sqldelight-native = { group = "app.cash.sqldelight", name = "native-driver", version.ref = "sqldelightVersion" }
+sqldelight-primitive = { group = "app.cash.sqldelight", name = "primitive-adapters", version.ref = "sqldelightVersion" }
+
+# --- Android: platforms the plan names in section 8.3 ------------------------
+livekit-android = { group = "io.getstream", name = "livekit-android-sdk", version.ref = "livekit" }
+play-billing = { group = "com.android.billingclient", name = "billing", version.ref = "playBilling" }
+androidx-security = { group = "androidx.security", name = "security-crypto", version.ref = "securityCrypto" }
+androidx-health = { group = "androidx.health.connect", name = "connect-client", version.ref = "androidxHealth" }
+
+# --- Android (versions track Moholla) --------------------------------------
+androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
+androidx-lifecycle-runtime = { group = "androidx.lifecycle", name = "lifecycle-runtime-compose", version.ref = "lifecycle" }
+androidx-lifecycle-viewmodel = { group = "androidx.lifecycle", name = "lifecycle-viewmodel-compose", version.ref = "lifecycle" }
+androidx-activity-compose = { group = "androidx.activity", name = "activity-compose", version.ref = "activityCompose" }
+compose-bom = { group = "androidx.compose", name = "compose-bom", version.ref = "composeBom" }
+compose-ui = { group = "androidx.compose.ui", name = "ui" }
+compose-ui-graphics = { group = "androidx.compose.ui", name = "ui-graphics" }
+compose-ui-tooling = { group = "androidx.compose.ui", name = "ui-tooling" }
+compose-ui-tooling-preview = { group = "androidx.compose.ui", name = "ui-tooling-preview" }
+compose-foundation = { group = "androidx.compose.foundation", name = "foundation" }
+compose-material3 = { group = "androidx.compose.material3", name = "material3" }
+# The full Material Symbol set. Plan section 4.3 says every icon is a Material
+# Symbol, and the core set only carries about thirty of them. Version comes from
+# the Compose BOM above; R8 strips the unused ones out of a release build.
+compose-icons-extended = { group = "androidx.compose.material", name = "material-icons-extended" }
+compose-animation = { group = "androidx.compose.animation", name = "animation" }
+navigation-compose = { group = "androidx.navigation", name = "navigation-compose", version.ref = "navigation" }
+
+okhttp = { group = "com.squareup.okhttp3", name = "okhttp", version.ref = "okhttp" }
+okhttp-logging = { group = "com.squareup.okhttp3", name = "logging-interceptor", version.ref = "okhttp" }
+room-runtime = { group = "androidx.room", name = "room-runtime", version.ref = "room" }
+room-ktx = { group = "androidx.room", name = "room-ktx", version.ref = "room" }
+room-compiler = { group = "androidx.room", name = "room-compiler", version.ref = "room" }
+datastore = { group = "androidx.datastore", name = "datastore-preferences", version.ref = "datastore" }
+coil-compose = { group = "io.coil-kt.coil3", name = "coil-compose", version.ref = "coil" }
+coil-okhttp = { group = "io.coil-kt.coil3", name = "coil-network-okhttp", version.ref = "coil" }
+splashscreen = { group = "androidx.core", name = "core-splashscreen", version = "1.0.1" }
+credentials = { group = "androidx.credentials", name = "credentials", version.ref = "credentials" }
+credentials-play = { group = "androidx.credentials", name = "credentials-play-services-auth", version.ref = "credentials" }
+googleid = { group = "com.google.android.libraries.identity.googleid", name = "googleid", version.ref = "googleid" }
+firebase-bom = { group = "com.google.firebase", name = "firebase-bom", version.ref = "firebaseBom" }
+firebase-auth = { group = "com.google.firebase", name = "firebase-auth" }
+firebase-messaging = { group = "com.google.firebase", name = "firebase-messaging" }
+junit = { group = "junit", name = "junit", version.ref = "junit" }
+haze = { group = "dev.chrisbanes.haze", name = "haze", version.ref = "haze" }
+media3-exoplayer = { group = "androidx.media3", name = "media3-exoplayer", version.ref = "media3" }
+androidx-media = { group = "androidx.media", name = "media", version.ref = "androidxMedia" }
+work-runtime = { group = "androidx.work", name = "work-runtime-ktx", version.ref = "work" }
+osmdroid = { group = "org.osmdroid", name = "osmdroid-android", version.ref = "osmdroid" }
+profileinstaller = { group = "androidx.profileinstaller", name = "profileinstaller", version.ref = "profileinstaller" }
+camera-core = { group = "androidx.camera", name = "camera-core", version.ref = "camerax" }
+camera-camera2 = { group = "androidx.camera", name = "camera-camera2", version.ref = "camerax" }
+camera-lifecycle = { group = "androidx.camera", name = "camera-lifecycle", version.ref = "camerax" }
+camera-view = { group = "androidx.camera", name = "camera-view", version.ref = "camerax" }
+tink-android = { group = "com.google.crypto.tink", name = "tink-android", version.ref = "tink" }
+robolectric = { group = "org.robolectric", name = "robolectric", version.ref = "robolectric" }
+roborazzi = { group = "io.github.takahirom.roborazzi", name = "roborazzi", version.ref = "roborazzi" }
+roborazzi-compose = { group = "io.github.takahirom.roborazzi", name = "roborazzi-compose", version.ref = "roborazzi" }
+roborazzi-junit-rule = { group = "io.github.takahirom.roborazzi", name = "roborazzi-junit-rule", version.ref = "roborazzi" }
+
+[plugins]
+android-application = { id = "com.android.application", version.ref = "agp" }
+android-library = { id = "com.android.library", version.ref = "agp" }
+kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
+kotlin-compose = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
+kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
+kotlin-multiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref = "kotlin" }
+ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
+google-services = { id = "com.google.gms.google-services", version.ref = "googleServices" }
+roborazzi = { id = "io.github.takahirom.roborazzi", version.ref = "roborazzi" }
+sqldelight = { id = "app.cash.sqldelight", version.ref = "sqldelightVersion" }
+composeMultiplatform = { id = "org.jetbrains.compose", version.ref = "composeMultiplatformVersion" }

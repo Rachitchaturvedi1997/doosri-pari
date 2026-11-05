@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <!-- The project sets GENERATE_INFOPLIST_FILE = NO, so the bundle keys live
+         here. Xcode fills in some of them at build time, but an app that ships
+         without CFBundleExecutable or a version does not launch, and finding
+         that out on a machine that is not this one costs a whole afternoon. -->
+    <key>CFBundleDevelopmentRegion</key>
+    <string>en</string>
+    <key>CFBundleDisplayName</key>
+    <string>Doosri Pari</string>
+    <key>CFBundleExecutable</key>
+    <string>$(EXECUTABLE_NAME)</string>
+    <key>CFBundleIdentifier</key>
+    <string>$(PRODUCT_BUNDLE_IDENTIFIER)</string>
+    <key>CFBundleInfoDictionaryVersion</key>
+    <string>6.0</string>
+    <key>CFBundleName</key>
+    <string>$(PRODUCT_NAME)</string>
+    <key>CFBundlePackageType</key>
+    <string>APPL</string>
+    <key>CFBundleShortVersionString</key>
+    <string>$(MARKETING_VERSION)</string>
+    <key>CFBundleVersion</key>
+    <string>$(CURRENT_PROJECT_VERSION)</string>
+    <key>LSRequiresIPhoneOS</key>
+    <true/>
+
+    <!-- The ten languages of plan section 3.5. Only en and hi are translated
+         so far; the rest fall back to English until translated. -->
+    <key>CFBundleLocalizations</key>
+    <array>
+        <string>en</string>
+        <string>hi</string>
+        <string>mr</string>
+        <string>kn</string>
+        <string>ta</string>
+        <string>te</string>
+        <string>bn</string>
+        <string>gu</string>
+        <string>ml</string>
+        <string>pa</string>
+    </array>
+
+    <!-- Plan section 4.3: every UI string must be able to grow with Dynamic
+         Type. Without these two keys, iOS caps text scaling and the settings
+         a 60+ user has already turned on silently stop working. -->
+    <key>UIApplicationSupportsIndirectInputEvents</key>
+    <true/>
+
+    <key>UILaunchScreen</key>
+    <dict/>
+
+    <!-- Location is read at the moment of a check-in and only if the user
+         turned sharing on. Plan section 6.3 forbids collecting it in the
+         background, so there is deliberately no "always" usage string and no
+         background location mode. -->
+    <key>NSLocationWhenInUseUsageDescription</key>
+    <string>Doosri Pari can share where you are with your family, but only if you choose to, and only at the moment you check in.</string>
+
+    <!-- No camera, microphone or photo access is requested. The plan asks for
+         these in later features, and an app that asks for permissions it does
+         not use is one people learn to tap through without reading. -->
+
+    <key>UIBackgroundModes</key>
+    <array>
+        <!-- The plan is explicit that escalation runs on the server, not the
+             phone, because iOS does not guarantee background timing. This
+             entry is here only so a reminder notification can be posted while
+             the app is backgrounded. -->
+        <string>remote-notification</string>
+    </array>
+</dict>
+</plist>

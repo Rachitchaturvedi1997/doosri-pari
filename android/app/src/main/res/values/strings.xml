@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Every user-facing string lives here rather than inline, because the app ships
+  in ten languages (plan section 3.5) and an inline string cannot be translated.
+  The Hindi form is written out because Hindi is the most common language among
+  the users this app is for; the other nine are filled in as translations land.
+-->
+<resources>
+    <string name="app_name">Doosri Pari</string>
+
+    <string name="today_greeting">Namaste, %1$s</string>
+    <string name="check_in_button">Main theek hoon · I\'m fine</string>
+    <string name="check_in_done">Checked in at %1$s</string>
+    <string name="check_in_button_description">Tell everyone you are fine today</string>
+
+    <string name="sos_button">SOS</string>
+    <string name="sos_button_description">Emergency help</string>
+
+    <string name="check_in_loading">Checking today\'s status</string>
+    <string name="check_in_offline">No connection. Your check-in will send when you are back online.</string>
+    <string name="check_in_failed">Could not send. Please try again.</string>
+    <string name="retry">Try again</string>
+
+    <string name="history_title">Last 14 days</string>
+    <string name="history_empty">Nothing here yet. Your check-ins will appear as days go by.</string>
+</resources>
